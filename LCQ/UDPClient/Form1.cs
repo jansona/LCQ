@@ -26,6 +26,28 @@ namespace UDPClient
             tbxSendtoport.Text = port.ToString();
         }
 
+        public IPAddress[] BroadcastAndReceive()
+        {
+            IPAddress[] userList;
+            IPAddress localIp = IPAddress.Parse(GetLocalIP());
+            IPEndPoint localIpEndPoint = new IPEndPoint(localIp, int.Parse(tbxlocalPort.Text));
+            sendUdpClient = new UdpClient(localIpEndPoint);
+
+            string announcement = "ONLINE";
+            byte[] sendbytes = Encoding.Unicode.GetBytes(announcement);
+            IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Broadcast,
+                int.Parse(tbxSendtoport.Text));
+            sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIpEndPoint);
+
+            remoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
+            byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIpEndPoint);
+            string message = Encoding.Unicode.GetString(receiveBytes);
+
+            userList = new IPAddress[5];    //xjb写的，留着等黄卜江负责的解析接口
+
+            return userList;
+        }
+
         public static string GetLocalIP()
         {
             string result = RunApp("route", "print", true);
@@ -170,7 +192,7 @@ namespace UDPClient
             else
             {
                 // 实名模式(套接字绑定到本地指定的端口)
-                IPAddress localIp = IPAddress.Parse(tbxlocalip.Text);
+                IPAddress localIp = IPAddress.Parse(GetLocalIP());
                 IPEndPoint localIpEndPoint = new IPEndPoint(localIp, int.Parse(tbxlocalPort.Text));
                 sendUdpClient = new UdpClient(localIpEndPoint);
             }
@@ -186,11 +208,10 @@ namespace UDPClient
             byte[] sendbytes = Encoding.Unicode.GetBytes(message);
             IPAddress remoteIp = IPAddress.Parse(tbxSendtoIp.Text);
             //IPEndPoint remoteIpEndPoint = new IPEndPoint(remoteIp, int.Parse(tbxSendtoport.Text));
-            IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Broadcast, int.Parse(tbxSendtoport.Text));
+            IPEndPoint remoteIpEndPoint = new IPEndPoint(remoteIp, int.Parse(tbxSendtoport.Text));
             sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIpEndPoint);
            // IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Parse("192.168.0.255"), int.Parse(tbxSendtoport.Text));
             //sendUdpClient.Connect(IPAddress.Parse("192.168.0.255"), int.Parse(tbxlocalPort.Text));
-            sendUdpClient.Send(sendbytes, sendbytes.Length,remoteIpEndPoint);
           
             sendUdpClient.Close();
            
