@@ -33,7 +33,6 @@ namespace LCQ
         /// 当前客户端
         /// </summary>
         private Socket client = null;
-        
 
         #endregion
 
