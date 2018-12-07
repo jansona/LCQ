@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UDPClient;
 
 namespace PigeonWindows
 {
@@ -19,9 +20,29 @@ namespace PigeonWindows
     /// </summary>
     public partial class ChatWindow : Window
     {
+        private UdpHandler handler;
+
+        public String Message { set; get; }
+
         public ChatWindow()
         {
             InitializeComponent();
+
+            handler = new UdpHandler(this);
+
+            this.DataContext = new ChatWindowViewModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //handler.SendMessage("192.168.99.1", "19966", "test message");
+            //textBox.Text = "send";
+            handler.TestSend();
+        }
+
+        public void Response(String message)
+        {
+            textBox.Text = message;
         }
     }
 }
