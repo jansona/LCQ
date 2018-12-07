@@ -13,12 +13,13 @@ namespace UDPClient
         private UdpClient receiveUpdClient;
         public frmUdp()
         {
+            
             InitializeComponent();
             IPAddress[] ips = Dns.GetHostAddresses("");
-            tbxlocalip.Text = ips[1].ToString();
+            tbxlocalip.Text = ips[3].ToString();
             int port = 51883;
             tbxlocalPort.Text = port.ToString();
-            tbxSendtoIp.Text = ips[1].ToString();
+            tbxSendtoIp.Text = ips[3].ToString();
             tbxSendtoport.Text = port.ToString();
         }
 
@@ -106,8 +107,8 @@ namespace UDPClient
             string message = (string)obj;
             byte[] sendbytes = Encoding.Unicode.GetBytes(message);
             IPAddress remoteIp = IPAddress.Parse(tbxSendtoIp.Text);
-            IPEndPoint remoteIpEndPoint = new IPEndPoint(remoteIp, int.Parse(tbxSendtoport.Text));
-            //IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Broadcast, int.Parse(tbxSendtoport.Text));
+            //IPEndPoint remoteIpEndPoint = new IPEndPoint(remoteIp, int.Parse(tbxSendtoport.Text));
+            IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Broadcast, int.Parse(tbxSendtoport.Text));
             sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIpEndPoint);
           
             sendUdpClient.Close();
