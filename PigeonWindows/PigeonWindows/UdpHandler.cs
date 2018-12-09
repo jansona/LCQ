@@ -55,7 +55,9 @@ namespace UDPClient
             IPEndPoint remoteIpEndPoint = new IPEndPoint(remoteIP, int.Parse(port));
             sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIpEndPoint);
 
-            //chatWindow.Response("has sent");
+            // 多线程修改UI示例
+            //Action<ChatWindow> updateUI = new Action<ChatWindow>((w) => { ((ChatWindow)w).textBox.Text = "has sent."; });
+            //chatWindow.Dispatcher.BeginInvoke(updateUI, chatWindow);
         }
 
         private void ReceiveMessage()
@@ -66,13 +68,14 @@ namespace UDPClient
                 try
                 {
                     // 关闭receiveUdpClient时此时会产生异常
-                    chatWindow.Response("listening");
                     byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIpEndPoint);
 
                     string message = Encoding.Unicode.GetString(receiveBytes);
 
                     // 显示消息内容
-                    chatWindow.Response(message);
+                    Action<ChatWindow> updateUI = new Action<ChatWindow>((w) => { w.Response(message); });
+                    chatWindow.Dispatcher.BeginInvoke(updateUI, chatWindow);
+
                 }
                 catch
                 {
