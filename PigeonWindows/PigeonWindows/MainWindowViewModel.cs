@@ -30,7 +30,7 @@ namespace PigeonWindows
         //#endregion
 
         #region attributes
-        public ObservableCollection<User> Friends { get; set; }
+        public static ObservableCollection<User> Friends { get; set; }
         //名片中的头像和昵称数据源
         private BitmapImage head;
         public BitmapImage Head

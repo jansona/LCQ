@@ -62,8 +62,8 @@ namespace UDPClient
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("Type={0},", this.Type.ToString());
-            sb.AppendFormat("Message={0}", this.Message.ToString());
+            sb.Append( this.Type.ToString());
+            sb.Append( this.Message.ToString());
             return sb.ToString();
         }
 
@@ -72,31 +72,47 @@ namespace UDPClient
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static Datagram Convert(string str,bool isChat)
+        public static Datagram CreatDatagram(DatagramType type)
+        {
+            Datagram data = new Datagram();
+            data.Type = type;
+            return data;
+        }
+
+        public static Datagram CreatDatagram(string str)
+        {
+            Datagram data = new Datagram();
+            data.Type = (DatagramType)Enum.Parse(typeof(DatagramType), "Chat");
+            data.Message = str;
+
+            return data;
+        }
+
+        public static Datagram CreatDatagram(string str, DatagramType type)
         {
             Datagram data = new Datagram();
             //前面不是CHAT主要是建立连接 取消连接等信号传送
-            if (!isChat)
-            {
-                IDictionary<string, string> idict = new Dictionary<string, string>();
+            //if (!isChat)
+            //{
+            //    IDictionary<string, string> idict = new Dictionary<string, string>();
 
-                string[] strlist = str.Split(',');
-                for (int i = 0; i < strlist.Length; i++)
-                {
-                    //数据报字符串的各个键值对放进字典类
-                    string[] info = strlist[i].Split('=');
-                    idict.Add(info[0], info[1]);
-                }
+            //    string[] strlist = str.Split(',');
+            //    for (int i = 0; i < strlist.Length; i++)
+            //    {
+            //        //数据报字符串的各个键值对放进字典类
+            //        string[] info = strlist[i].Split('=');
+            //        idict.Add(info[0], info[1]);
+            //    }
 
-                data.Type = (DatagramType)Enum.Parse(typeof(DatagramType), idict["Type"]);
+            //    data.Type = (DatagramType)Enum.Parse(typeof(DatagramType), idict["Type"]);
 
-                data.Message = idict["Message"];
-            }
-            else
-            {
-                data.Type = (DatagramType)Enum.Parse(typeof(DatagramType), "Chat");
-                data.Message = str;
-            }
+            //    data.Message = idict["Message"];
+            //}
+            //else
+            //{
+            //    data.Type = (DatagramType)Enum.Parse(typeof(DatagramType), "Chat");
+            //    data.Message = str;
+            //}
 
             return data;
         }
