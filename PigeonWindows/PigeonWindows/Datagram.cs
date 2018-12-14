@@ -33,28 +33,35 @@ namespace PigeonWindows
             sb.Append(this.Message.ToString());
             return sb.ToString();
         }
-        public static Datagram CreatDatagram(DatagramType type,string str)
-        {
-            Datagram data = new Datagram
-            {
-                Type = type,
-                Message = str
-            };
-            return data;
-        }
-        public static Datagram CreatDatagram()
-        {
-            Datagram data = new Datagram
-            {
-                Type = (DatagramType)Enum.Parse(typeof(DatagramType), "UserList")
-            };
 
-            return data;
+        public Datagram(string type,string message)
+        {
+            Type = Type = (DatagramType)Enum.Parse(typeof(DatagramType), type);
+            Message = message;
         }
 
-        public static Datagram CreatDatagram(string str, DatagramType type)
+        public Datagram()
         {
-            Datagram data = new Datagram();
+
+        }
+
+        public Datagram(List<User> users)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (User user in users)
+            {
+                sb.Append(user.UserName);
+                sb.Append(",");
+                sb.Append(user.UserIp);
+                sb.Append(",");
+            }
+            Type = (DatagramType)Enum.Parse(typeof(DatagramType), "UserList");
+            Message = sb.ToString();
+        }
+
+        //public static Datagram CreatDatagram(string str, DatagramType type)
+        //{
+        //    Datagram data = new Datagram();
             //前面不是CHAT主要是建立连接 取消连接等信号传送
             //if (!isChat)
             //{
@@ -78,8 +85,8 @@ namespace PigeonWindows
             //    data.Message = str;
             //}
 
-            return data;
-        }
+        //    return data;
+        //}
 
         public static Datagram GetDatagramFromStr(string str)
         {
@@ -93,14 +100,33 @@ namespace PigeonWindows
             return data;
         }
 
-        public static void Convert(string str)
+        public static void Convert(string dataStr,string ip,MainWindow window)
         {
-            Datagram data = GetDatagramFromStr(str);
+            Datagram data = GetDatagramFromStr(dataStr);
             switch ((int)data.Type)
             {
                 case 1:
+                    window.UpdateClientList(ip, true);
+                    break;
+                case 2:
+                    window.UpdateClientList(ip, true);
+                    break;
+                case 3:
+                    break;
+                case 4:
                     break;
             }
+        }
+
+        public List<User> GetUsers(Datagram data)
+        {
+            List<User> users = new List<User>();
+            string []strList = data.Message.Split(',');
+            for(int i = 0; i < strList.Length / 2; i++)
+            {
+                users.Add(new User(strList[2 * i], strList[2 * i + 1]));
+            }
+            return users;
         }
     }
 
@@ -110,6 +136,5 @@ namespace PigeonWindows
         DownLine,
         Chat,
         UserList
-
     }
 }
