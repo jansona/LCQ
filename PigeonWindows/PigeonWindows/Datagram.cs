@@ -106,19 +106,21 @@ namespace PigeonWindows
             switch ((int)data.Type)
             {
                 case 1:
-                    window.UpdateClientList(ip, true);
+                    window.UpdateClientList(ip,data.Message, true);
                     break;
                 case 2:
-                    window.UpdateClientList(ip, true);
+                    window.UpdateClientList(ip,data.Message, true);
                     break;
                 case 3:
+                    window.AppendMessageRecord(ip, data.Message);
                     break;
                 case 4:
+                    window.InitClientList(GetUsers(data));
                     break;
             }
         }
 
-        public List<User> GetUsers(Datagram data)
+        public static List<User> GetUsers(Datagram data)
         {
             List<User> users = new List<User>();
             string []strList = data.Message.Split(',');
