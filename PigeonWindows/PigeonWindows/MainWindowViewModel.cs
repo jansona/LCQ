@@ -53,13 +53,16 @@ namespace PigeonWindows
         public DelegateCommand CloseCommand { get; set; }
         #endregion
 
-        //当friends更新后，更新friends的ui
+        //更新friends
         public  List<User> FriendsChange(List<User> users) {
+            Friends.Clear();
             foreach (User user in users) {
                 Friends.Add(user);
             }
             return users;
         }
+        //当friends更新后，更新friends的ui
+
         #region constructor
         public MainWindowViewModel()
         {
@@ -76,9 +79,9 @@ namespace PigeonWindows
             });
             SelectItemChangedCommand = new DelegateCommand<object>((p) => {
                 ListView lv = p as ListView;
-                Friend friend = lv.SelectedItem as Friend;
+                User friend = lv.SelectedItem as User;
                 Head = friend.Head;
-                Nickname = friend.Nickname;
+                Nickname = friend.UserName;
             });
         }
         #endregion
