@@ -39,15 +39,15 @@ namespace PigeonWindows
             //textBox.Text = "send";
             //handler.TestSend();
         }
-        public void UpdateClientList(string remoteIP, bool isOnline)
+        private void UpdateClientList(string remoteIP, string name, bool isOnline)
+        {
+            //MainWindowViewModel.Friends.Add(new User())
+        }
+        private void AppendMessageRecord(string remoteIP, string message)
         {
 
         }
-        public void AppendMessageRecord(string remoteIP, string message)
-        {
-
-        }
-        public void InitClientList(List<User> users)
+        private void InitClientList(List<User> list)
         {
 
         }
