@@ -20,6 +20,9 @@ namespace PigeonWindows
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public String Message { set; get; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,6 +32,24 @@ namespace PigeonWindows
         private void NavBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //handler.SendMessage("192.168.99.1", "19966", "test message");
+            //textBox.Text = "send";
+            //handler.TestSend();
+        }
+        private void UpdateClientList(string remoteIP, bool isOnline)
+        {
+
+        }
+        private void AppendMessageRecord(string remoteIP, string message)
+        {
+
+        }
+        private void InitClientList()
+        {
+
         }
     }
 }

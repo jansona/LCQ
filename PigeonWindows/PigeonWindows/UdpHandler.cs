@@ -11,7 +11,7 @@ namespace UDPClient
 {
     public partial class UdpHandler
     {
-        private ChatWindow chatWindow;
+        private MainWindow mainWindow;
 
         private UdpClient sendUdpClient;
         private UdpClient receiveUpdClient;
@@ -19,9 +19,9 @@ namespace UDPClient
         public String SendPort { set; get; }
         public String ListenPort { set; get; }
 
-        public UdpHandler(ChatWindow window):this()
+        public UdpHandler(MainWindow window):this()
         {
-            chatWindow = window;
+            mainWindow = window;
         }
 
         public UdpHandler()
@@ -56,8 +56,8 @@ namespace UDPClient
             sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIpEndPoint);
 
             // 多线程修改UI示例
-            //Action<ChatWindow> updateUI = new Action<ChatWindow>((w) => { ((ChatWindow)w).textBox.Text = "has sent."; });
-            //chatWindow.Dispatcher.BeginInvoke(updateUI, chatWindow);
+            //Action<MainWindow> updateUI = new Action<MainWindow>((w) => { ((MainWindow)w).textBox.Text = "has sent."; });
+            //MainWindow.Dispatcher.BeginInvoke(updateUI, MainWindow);
         }
 
         private void ReceiveMessage()
@@ -73,8 +73,8 @@ namespace UDPClient
                     string message = Encoding.Unicode.GetString(receiveBytes);
 
                     // 显示消息内容
-                    Action<ChatWindow> updateUI = new Action<ChatWindow>((w) => { w.Response(message); });
-                    chatWindow.Dispatcher.BeginInvoke(updateUI, chatWindow);
+                    //Action<MainWindow> updateUI = new Action<MainWindow>((w) => { w.Response(message); });
+                    //MainWindow.Dispatcher.BeginInvoke(updateUI, MainWindow);
 
                 }
                 catch

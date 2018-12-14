@@ -5,4 +5,12 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Datagram.cs" />
+    <Compile Remove="FrmUser.cs" />
+    <Compile Remove="LanInfo.cs" />
+    <Compile Remove="SocketUdpClient.cs" />
+    <Compile Remove="SocketUdpServer.cs" />
+  </ItemGroup>
+
 </Project>

@@ -17,8 +17,8 @@ namespace UDPClient
         {
             
             InitializeComponent();
-            IPAddress[] ips = Dns.GetHostAddresses("");
-            //tbxlocalip.Text = ips[3].ToString();
+            //IPAddress[] ips = Dns.GetHostAddresses("");
+            //tbxlocalip.Text = ips[2].ToString();
             tbxlocalip.Text = GetLocalIP();
             int port = 51883;
             tbxlocalPort.Text = port.ToString();
@@ -206,7 +206,7 @@ namespace UDPClient
         {
             string message = (string)obj;
             Datagram datagram = new Datagram();
-            //datagram = Datagram.Convert(message, true);
+            datagram = Datagram.Convert(message, true);
             byte[] sendbytes = Encoding.Unicode.GetBytes(message);
             IPAddress remoteIp = IPAddress.Parse(tbxSendtoIp.Text);
             //IPEndPoint remoteIpEndPoint = new IPEndPoint(remoteIp, int.Parse(tbxSendtoport.Text));

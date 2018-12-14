@@ -239,9 +239,6 @@
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-
-
-
                 </ListView>
                 <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
                                          PlacementMode="TopAndAlignCentres"
@@ -250,93 +247,34 @@
                                          HorizontalAlignment="Right"
                                          VerticalAlignment="Bottom"
                                          Margin="10 20">
-
                 </materialDesign:PopupBox>
             </Grid>
             <Grid Grid.Column="1">
-                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                     Width="350"
-                                     Height="520"
-                                     VerticalAlignment="Center"
-                                     >
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Image  Stretch="UniformToFill" Source="{Binding Head}" />
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="67*"/>
-                                <ColumnDefinition Width="3*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button  Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Top"
-                                    Margin="0,-30,5.4,0"
-                                
-                                    BorderBrush="{x:Null}"
-                                    ToolTip="发送消息" Grid.ColumnSpan="2">
-                                <Viewbox Width="24"
-                                         Height="24">
-                                    <Canvas Width="24"
-                                            Height="24">
-                                        <Path Data="M17,11H15V9H17M13,11H11V9H13M9,11H7V9H9M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4C22,2.89 21.1,2 20,2Z"
-                                              Fill="White" />
-                                    </Canvas>
-                                </Viewbox>
-
-                            </Button>
-
-                            <StackPanel Orientation="Vertical" Grid.ColumnSpan="2" Margin="0,0,0.4,0">
-                                <TextBlock Text="{Binding Nickname}"
-                                           HorizontalAlignment="Center"
-                                           FontSize="35"
-                                           Margin="0 20 0 0" />
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="80 5 0 0 "
-                                            
-                                            >
-                                    <TextBlock Text="账号  "
-                                               Foreground="#B7B7B7" />
-                                    <TextBlock Text="163163163@qq.com" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="80 5 0 0 ">
-                                    <TextBlock Text="昵称  "
-                                               Foreground="#B7B7B7" />
-                                    <TextBlock Text="Fear of god!" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="80 5 0 0 ">
-                                    <TextBlock Text="手机  "
-                                               Foreground="#B7B7B7" />
-                                    <TextBlock Text="18999999999" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="80 5 0 0 ">
-                                    <TextBlock Text="邮箱  "
-                                               Foreground="#B7B7B7" />
-                                    <TextBlock Text="163163163@qq.com" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="80 5 0 0 ">
-                                    <TextBlock Text="职业  "
-                                               Foreground="#B7B7B7" />
-                                    <TextBlock Text="计算机/互联网/通信" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal"
-                                            Margin="80 5 0 0 ">
-                                    <TextBlock Text="空间  "
-                                               Foreground="#B7B7B7" />
-                                    <TextBlock Text="Fear of god! 的空间" />
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="57*"/>
+                    <RowDefinition Height="443*"/>
+                    <RowDefinition Height="142*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <TextBlock HorizontalAlignment="Left" 
+                       TextWrapping="Wrap" 
+                       Text="{Binding Nickname}" 
+                       VerticalAlignment="Top" 
+                       FontSize="35"
+                       Height="49" Width="340"/>
+                    <Grid HorizontalAlignment="Right"
+                          Width="150">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
                     </Grid>
-                </materialDesign:Card>
+                </Grid>
+                <RichTextBox x:Name="MessageBox" HorizontalAlignment="Left" Height="92" Margin="10,9.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="832"/>
+                <Button Content="发送" HorizontalAlignment="Left" Margin="767,118.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+                <RichTextBox x:Name="ShowBox" HorizontalAlignment="Left" Height="491" Margin="10,0.2,0,0"  VerticalAlignment="Top" Width="832" SpellCheck.IsEnabled="True" Grid.Row="1"/>
             </Grid>
         </Grid>
     </Grid>
