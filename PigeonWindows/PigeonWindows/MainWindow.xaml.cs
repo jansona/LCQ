@@ -41,7 +41,17 @@ namespace PigeonWindows
         }
         private void UpdateClientList(string remoteIP, string name, bool isOnline)
         {
-            //MainWindowViewModel.Friends.Add(new User())
+            if (isOnline)
+            {
+                MainWindowViewModel.Friends.Add(new User(remoteIP, name));
+            }
+            else
+            {
+                var query = from user in MainWindowViewModel.Friends
+                            where user.UserIp == remoteIP
+                            select user;
+                MainWindowViewModel.Friends.Remove(query.ToList()[0]);
+            }
         }
         private void AppendMessageRecord(string remoteIP, string message)
         {
@@ -49,7 +59,10 @@ namespace PigeonWindows
         }
         private void InitClientList(List<User> list)
         {
-
+            foreach(User user in list)
+            {
+                MainWindowViewModel.Friends.Add(user);
+            }
         }
     }
 }
