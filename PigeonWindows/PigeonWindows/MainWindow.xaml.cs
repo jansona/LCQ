@@ -39,7 +39,7 @@ namespace PigeonWindows
             //textBox.Text = "send";
             //handler.TestSend();
         }
-        private void UpdateClientList(string remoteIP, string name, bool isOnline)
+        public void UpdateClientList(string remoteIP, string name, bool isOnline)
         {
             if (isOnline)
             {
@@ -53,11 +53,11 @@ namespace PigeonWindows
                 MainWindowViewModel.Friends.Remove(query.ToList()[0]);
             }
         }
-        private void AppendMessageRecord(string remoteIP, string message)
+        public void AppendMessageRecord(string remoteIP, string message)
         {
 
         }
-        private void InitClientList(List<User> list)
+        public void InitClientList(List<User> list)
         {
             foreach(User user in list)
             {

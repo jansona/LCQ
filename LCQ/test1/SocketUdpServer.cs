@@ -122,28 +122,28 @@ namespace test1
                     break;
                 case DatagramType.Chat:
                     //得到当前要交谈的用户
-                    LanInfo lanInfo = LanList.CurrentLanList.Find(x => string.Compare(this.remoteEndPoint.ToString(), x.RemoteEndPoint.ToString()) == 0);
-                    //如果有查询到该用户在自己这边登记过
-                    if (lanInfo != null)
-                    {
+                    //LanInfo lanInfo = LanList.CurrentLanList.Find(x => string.Compare(this.remoteEndPoint.ToString(), x.RemoteEndPoint.ToString()) == 0);
+                    ////如果有查询到该用户在自己这边登记过
+                    //if (lanInfo != null)
+                    //{
 
-                        if (lanInfo.State == TalkState.Talking)
-                        {
-                            //正在交谈 直接打开这次窗口
-                            this.OnChatComplete(this, new EventArgs());
-                        }
-                        else
-                        {
-                            //没有交谈 将窗口加入信息的队列
-                            MessageInfo messageInfo = new MessageInfo()
-                            {
-                                Message = this.message,
-                                ReceiveTime = DateTime.Now,
-                                RemoteEndPoint = this.remoteEndPoint
-                            };
-                            QueueMessage.Add(lanInfo.Host, messageInfo);
-                        }
-                    }
+                    //    if (lanInfo.State == TalkState.Talking)
+                    //    {
+                    //        //正在交谈 直接打开这次窗口
+                    //        this.OnChatComplete(this, new EventArgs());
+                    //    }
+                    //    else
+                    //    {
+                    //        //没有交谈 将窗口加入信息的队列
+                    //        MessageInfo messageInfo = new MessageInfo()
+                    //        {
+                    //            Message = this.message,
+                    //            ReceiveTime = DateTime.Now,
+                    //            RemoteEndPoint = this.remoteEndPoint
+                    //        };
+                    //        QueueMessage.Add(lanInfo.Host, messageInfo);
+                    //    }
+                    //}
                     break;
             }
         }
