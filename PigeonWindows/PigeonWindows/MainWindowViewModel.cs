@@ -16,16 +16,21 @@ namespace PigeonWindows
 {
     class MainWindowViewModel : BindableBase
     {
-        #region class
-        public class Friend
-        {
-            public string Nickname { get; set; }
-            public BitmapImage Head { get; set; }
-        }
-        #endregion
+
+        //#region class
+        //public class Friend
+        //{
+        //    public string Nickname { get; set; }
+        //    public BitmapImage Head { get; set; }
+        //    public Friend(string name) {
+        //        Nickname = name;
+        //       // Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg"));
+        //    }
+        //}
+        //#endregion
 
         #region attributes
-        public ObservableCollection<Friend> Friends { get; set; }
+        public ObservableCollection<User> Friends { get; set; }
         //名片中的头像和昵称数据源
         private BitmapImage head;
         public BitmapImage Head
@@ -48,10 +53,17 @@ namespace PigeonWindows
         public DelegateCommand CloseCommand { get; set; }
         #endregion
 
+        //当friends更新后，更新friends的ui
+        public  List<User> FriendsChange(List<User> users) {
+            foreach (User user in users) {
+                Friends.Add(user);
+            }
+            return users;
+        }
         #region constructor
         public MainWindowViewModel()
         {
-            Friends = new ObservableCollection<Friend>();
+            Friends = new ObservableCollection<User>();
             //Friends.Add(new Friend() { Nickname = "Fear of god!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg")) });
             //Friends.Add(new Friend() { Nickname = "Fear of goddness!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon2.jpg")) });
             //Friends.Add(new Friend() { Nickname = "欧阳铁柱", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon3.jpg")) });

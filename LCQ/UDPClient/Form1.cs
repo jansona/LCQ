@@ -18,7 +18,7 @@ namespace UDPClient
             
             InitializeComponent();
             //IPAddress[] ips = Dns.GetHostAddresses("");
-            //tbxlocalip.Text = ips[3].ToString();
+            //tbxlocalip.Text = ips[2].ToString();
             tbxlocalip.Text = GetLocalIP();
             int port = 51883;
             tbxlocalPort.Text = port.ToString();
