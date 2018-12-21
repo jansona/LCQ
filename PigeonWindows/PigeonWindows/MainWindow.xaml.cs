@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using UDPClient;
 namespace PigeonWindows
 {
     /// <summary>
@@ -28,6 +28,7 @@ namespace PigeonWindows
         public MainWindow()
         {
             InitializeComponent();
+            new UdpHandler(this);
             this.DataContext = new MainWindowViewModel();
         }
 
@@ -61,7 +62,7 @@ namespace PigeonWindows
                         where user.UserIp == remoteIP
                         select user;
             User targetUser = query.First();
-            targetUser.Messages.Add(new PigeonWindows.Message(remoteIP,message));
+            //targetUser.Messages.Add(new PigeonWindows.Message(remoteIP,message));
         }
         public void InitClientList(List<User> list)
         {

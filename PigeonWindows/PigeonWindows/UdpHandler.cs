@@ -22,6 +22,7 @@ namespace UDPClient
         public UdpHandler(MainWindow window):this()
         {
             mainWindow = window;
+            Broadcast(DatagramType.OnLine);
         }
 
         public UdpHandler()
@@ -37,7 +38,7 @@ namespace UDPClient
             Thread receiveThread = new Thread(ReceiveMessage);
             receiveThread.Start();
 
-            Broadcast(DatagramType.OnLine);
+            
         }
 
         public void TestSend()
@@ -74,6 +75,7 @@ namespace UDPClient
 
                     string message = Encoding.Unicode.GetString(receiveBytes);
 
+                    string sss = remoteIpEndPoint.Address.ToString();
                     Datagram.Convert(message, remoteIpEndPoint.Address.ToString(), mainWindow);
 
                 }
