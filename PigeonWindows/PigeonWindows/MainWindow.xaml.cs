@@ -35,6 +35,14 @@ namespace PigeonWindows
 
             MyName = "ha";
         }
+        public MainWindow(string myname)
+        {
+            InitializeComponent();
+            handler = new UdpHandler(this);
+            this.DataContext = new MainWindowViewModel();
+
+            MyName = myname;
+        }
 
         private void NavBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
