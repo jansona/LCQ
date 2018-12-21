@@ -36,6 +36,8 @@ namespace UDPClient
             receiveUpdClient = new UdpClient(listenEndPoint);
             Thread receiveThread = new Thread(ReceiveMessage);
             receiveThread.Start();
+
+            Broadcast(DatagramType.OnLine);
         }
 
         public void TestSend()
@@ -84,23 +86,24 @@ namespace UDPClient
             }
         }
 
-        public IPAddress[] BroadcastAndReceive()
+        public void Broadcast(DatagramType type)
         {
-            IPAddress[] userList;
+            //IPAddress[] userList;
             
-            string announcement = "ONLINE";
-            byte[] sendbytes = Encoding.Unicode.GetBytes(announcement);
+            //string announcement = "ONLINE";
+            byte[] sendbytes = Encoding.Unicode.GetBytes(
+                new Datagram(type.ToString(), mainWindow.MyName).ToString());
             IPEndPoint remoteIPEndPoint = new IPEndPoint(IPAddress.Broadcast,
                 int.Parse(ListenPort));
             sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);
 
-            remoteIPEndPoint = new IPEndPoint(IPAddress.Any, 19966);
-            byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIPEndPoint);
-            string message = Encoding.Unicode.GetString(receiveBytes);
+            //remoteIPEndPoint = new IPEndPoint(IPAddress.Any, 19966);
+            //byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIPEndPoint);
+            //string message = Encoding.Unicode.GetString(receiveBytes);
 
-            userList = new IPAddress[5];    //xjb写的，留着等黄卜江负责的解析接口
+            // userList = new IPAddress[5];    //xjb写的，留着等黄卜江负责的解析接口
 
-            return userList;
+            //return userList;
         }
 
 
