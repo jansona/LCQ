@@ -25,7 +25,7 @@ namespace PigeonWindows
         static string encryptKey = "Oyea";    //定义密钥  
 
         //保存之前加密text
-        static string Encrypt(string str)
+        public static string Encrypt(string str)
         {
             DESCryptoServiceProvider descsp = new DESCryptoServiceProvider();   //实例化加/解密类对象   
 
