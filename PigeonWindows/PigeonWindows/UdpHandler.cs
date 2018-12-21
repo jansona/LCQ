@@ -72,9 +72,7 @@ namespace UDPClient
 
                     string message = Encoding.Unicode.GetString(receiveBytes);
 
-                    // 显示消息内容
-                    //Action<MainWindow> updateUI = new Action<MainWindow>((w) => { w.Response(message); });
-                    //MainWindow.Dispatcher.BeginInvoke(updateUI, MainWindow);
+                    Datagram.Convert(message, remoteIpEndPoint.Address.ToString(), mainWindow);
 
                 }
                 catch
