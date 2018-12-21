@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Mvvm;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.ComponentModel;
+using UDPClient;
 
 namespace PigeonWindows
 {
@@ -44,6 +46,12 @@ namespace PigeonWindows
                 SetProperty(ref message, value);
             }
         }
+        private User friend;
+        public User Friend
+        {
+            get { return friend; }
+            set { SetProperty(ref friend, value);  }
+        }
         #endregion
 
         #region delegates
@@ -54,7 +62,7 @@ namespace PigeonWindows
         //添加好友
         public DelegateCommand AddCommand { get; set; }
         //发送消息
-        public DelegateCommand SendCommand { get; set; }
+        public DelegateCommand SendMessageCommand { get; set; }
         #endregion
 
         #region public
@@ -85,14 +93,8 @@ namespace PigeonWindows
             //Friends.Add(new Friend() { Nickname = "欧阳铁柱", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon3.jpg")) });
             //Friends.Add(new Friend() { Nickname = "皇甫二妞", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon4.jpg")) });
             //Friends.Add(new Friend() { Nickname = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
-            //Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
-            //Friends.Add(new User() { UserName = "me", UserIp= "192.168.43.131" });
-            User user1 = new User("192.168.43.131", "me");
-            User user2 = new User();
-            user1.Messages.Text = "我的聊天纪录";
-            user2.UserName = "幺妹"; user2.Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg"));
-            user2.Messages.Text = "幺妹的聊天纪录";
-            Friends.Add(user1); Friends.Add(user2);
+            Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")), Messages = new Message("幺妹！") });
+            Friends.Add(new User() { UserName = "me", UserIp = "192.168.43.131", Messages = new Message("mememe!") });
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
                 window.handler.receiveUpdClient.Close();
@@ -101,16 +103,19 @@ namespace PigeonWindows
 
             SelectItemChangedCommand = new DelegateCommand<object>((p) => {
                 ListView lv = p as ListView;
-                User friend = lv.SelectedItem as User;
-                Head = friend.Head;
-                Nickname = friend.UserName;
-                Message = friend.Messages.Text;
+                Friend = lv.SelectedItem as User;
+                Head = Friend.Head;
+                Nickname = Friend.UserName;
+                Message = Friend.Messages.Text;
             });
             
             AddCommand = new DelegateCommand(() => {
                 Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
             });
 
+            SendMessageCommand = new DelegateCommand(() => {
+                Message = Friend.Messages.Text;
+            });
         }
         #endregion
     }
