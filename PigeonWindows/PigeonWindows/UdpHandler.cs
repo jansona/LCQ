@@ -22,7 +22,7 @@ namespace UDPClient
         public UdpHandler(MainWindow window):this()
         {
             mainWindow = window;
-            //Broadcast(DatagramType.OnLine);
+            Broadcast(DatagramType.OnLine);
         }
 
         public UdpHandler()
@@ -68,15 +68,16 @@ namespace UDPClient
             IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
             while (true)
             {
-                //try
+                try
                 {
                     // 关闭receiveUdpClient时此时会产生异常
                     byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIpEndPoint);
 
                     string message = Encoding.Unicode.GetString(receiveBytes);
 
-                    string sss = remoteIpEndPoint.Address.ToString();
-                    Datagram.Convert(message, remoteIpEndPoint.Address.ToString(), mainWindow);
+                    string remoteIPAddress = remoteIpEndPoint.Address.ToString();
+                    //if(remoteIPAddress != GetLocalIP())
+                    Datagram.Convert(message, remoteIPAddress, mainWindow, sendUdpClient);
 
                     //UpdateUIDelegate updateUIDelegate = new UpdateUIDelegate(update);
 
@@ -84,11 +85,10 @@ namespace UDPClient
                     //this.lstView.Dispatcher.Invoke(updateUIDelegate, Item, NewItem);
 
                 }
-                //catch(Exception e)
-                //{
-                //    Console.WriteLine(e.Message);
-                //    break;
-                //}
+                catch
+                {
+                    break;
+                }
             }
         }
 
@@ -216,6 +216,8 @@ namespace UDPClient
                 return ex.Message;
             }
         }
+
+        
 
 
         // 接受消息

@@ -46,8 +46,8 @@ namespace PigeonWindows
             //handler.TestSend();
             //ShowBox.AppendText(MessageBox.Text + '\n');
             User friend = FriendList.SelectedItem as User;
-            var data = new Datagram(DatagramType.Chat.ToString(), MessageBox.Text);
-            handler.SendMessage(friend.UserIp, "9966", data.ToString());
+            //var data = new Datagram(DatagramType.Chat.ToString(), MessageBox.Text);
+            //handler.SendMessage(friend.UserIp, "9966", data.ToString());
             
             friend.Export();
         }
