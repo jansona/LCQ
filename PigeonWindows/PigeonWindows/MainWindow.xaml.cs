@@ -42,11 +42,25 @@ namespace PigeonWindows
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ShowBox.AppendText("abc");
-            //handler.SendMessage("192.168.99.1", "19966", "test message");
+            User friend = FriendList.SelectedItem as User;
+            
+            TextRange textRange = new TextRange(MessageBox.Document.ContentStart, MessageBox.Document.ContentEnd);
+            friend.Messages.Text = textRange.Text;
+            ShowBox.AppendText(friend.Messages.Text);
+            friend.Export();
+            //handler.SendMessage(friend.UserIp, "9966", "test message");
             //textBox.Text = "send";
             //handler.TestSend();
         }
+        private void FriendList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            User friend = FriendList.SelectedItem as User;
+            friend.Import();
+            string str = friend.Messages.Text;
+            ShowBox.Document.Blocks.Clear();
+            ShowBox.AppendText(str);
+        }
+
         public void UpdateClientList(string remoteIP, string name, bool isOnline)
         {
             if (isOnline)

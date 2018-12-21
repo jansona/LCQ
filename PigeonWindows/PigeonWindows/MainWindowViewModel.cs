@@ -32,6 +32,8 @@ namespace PigeonWindows
             get { return nickname; }
             set { SetProperty(ref nickname, value); }
         }
+        public Message message = new Message();
+
         #endregion
 
         #region delegates
@@ -65,19 +67,22 @@ namespace PigeonWindows
             //Friends.Add(new Friend() { Nickname = "Fear of goddness!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon2.jpg")) });
             //Friends.Add(new Friend() { Nickname = "欧阳铁柱", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon3.jpg")) });
             //Friends.Add(new Friend() { Nickname = "皇甫二妞", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon4.jpg")) });
-            //Friends.Add(new Friend() { Nickname = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
-            Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
+            Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
+            Friends.Add(new User() { UserName = "幺妹",UserIp= "192.168.153.9", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
             
 
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
             });
             SelectItemChangedCommand = new DelegateCommand<object>((p) => {
+                
                 ListView lv = p as ListView;
                 User friend = lv.SelectedItem as User;
                 Head = friend.Head;
                 Nickname = friend.UserName;
-
+                friend.Import();
+                this.message =friend.Messages;
+                
             });
             AddCommand = new DelegateCommand(() => {
                 Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
@@ -85,8 +90,8 @@ namespace PigeonWindows
             SendMessageCommend =new DelegateCommand<object>((p) => {
                 ListView lv = p as ListView;
                 User friend = lv.SelectedItem as User;
-                Message message = new Message();
-                friend.Messages.Add(message);
+                
+                //friend.Messages.Text += "abc";
             });
         }
         #endregion
