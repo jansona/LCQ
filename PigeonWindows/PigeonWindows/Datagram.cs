@@ -109,8 +109,11 @@ namespace PigeonWindows
             {
                 case 1:
                     window.UpdateClientList(ip,data.Message, true);
+
+                    List<User> users = MainWindowViewModel.Friends.ToList();
+                    users.Add(new User(UDPClient.UdpHandler.GetLocalIP(), window.MyName));
                     byte[] sendbytes = Encoding.Unicode.GetBytes(
-                         new Datagram(MainWindowViewModel.Friends.ToList()).ToString());
+                         new Datagram(users).ToString());
                     IPEndPoint remoteIPEndPoint = new IPEndPoint(IPAddress.Parse(ip),
                         9966);
                     sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);
