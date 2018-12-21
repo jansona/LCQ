@@ -52,9 +52,9 @@ namespace PigeonWindows
             StringBuilder sb = new StringBuilder();
             foreach (User user in users)
             {
-                sb.Append(user.UserName);
-                sb.Append(",");
                 sb.Append(user.UserIp);
+                sb.Append(",");
+                sb.Append(user.UserName);
                 sb.Append(",");
             }
             Type = (DatagramType)Enum.Parse(typeof(DatagramType), "UserList");
