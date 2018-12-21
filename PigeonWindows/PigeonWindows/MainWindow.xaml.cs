@@ -30,9 +30,9 @@ namespace PigeonWindows
         public MainWindow()
         {
             InitializeComponent();
-            MyName = "ha";
             handler = new UdpHandler(this);
-            this.DataContext = new MainWindowViewModel(this);
+            this.DataContext = new MainWindowViewModel();
+            MyName = "ha";
         }
 
         private void NavBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -53,7 +53,6 @@ namespace PigeonWindows
 
                 Action updateUI = new Action(() => { MainWindowViewModel.Friends.Add(new User(remoteIP, name)); });
                 Dispatcher.BeginInvoke(updateUI);
-              
             }
             else
             {
