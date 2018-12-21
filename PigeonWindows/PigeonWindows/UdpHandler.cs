@@ -27,12 +27,12 @@ namespace UDPClient
 
         public UdpHandler()
         {
-            SendPort = "9966";
+            SendPort = "6699";
             IPAddress localIp = IPAddress.Parse(GetLocalIP());
             IPEndPoint sendEndPoint = new IPEndPoint(localIp, int.Parse(SendPort));
             sendUdpClient = new UdpClient(sendEndPoint);
 
-            ListenPort = "19966";
+            ListenPort = "9966";
             IPEndPoint listenEndPoint = new IPEndPoint(localIp, int.Parse(ListenPort));
             receiveUpdClient = new UdpClient(listenEndPoint);
             Thread receiveThread = new Thread(ReceiveMessage);
@@ -65,7 +65,7 @@ namespace UDPClient
         public delegate void UpdateUIDelegate(string message, string ip, MainWindow window);
         private void ReceiveMessage()
         {
-            IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, 9966);
+            IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
             while (true)
             {
                 //try
