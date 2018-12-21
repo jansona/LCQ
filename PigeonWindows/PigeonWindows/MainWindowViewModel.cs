@@ -32,6 +32,12 @@ namespace PigeonWindows
             get { return nickname; }
             set { SetProperty(ref nickname, value); }
         }
+        private string massage;
+        public string Massage
+        {
+            get { return massage; }
+            set { SetProperty(ref massage, value); }
+        }
         #endregion
 
         #region delegates
@@ -41,6 +47,8 @@ namespace PigeonWindows
         public DelegateCommand CloseCommand { get; set; }
         //添加好友
         public DelegateCommand AddCommand { get; set; }
+        //发送消息
+        public DelegateCommand SendCommand { get; set; }
         #endregion
 
         #region public
@@ -75,10 +83,14 @@ namespace PigeonWindows
                 Head = friend.Head;
                 Nickname = friend.UserName;
             });
+            
             AddCommand = new DelegateCommand(() => {
-                Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
+                //Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
             });
-        }
+            SendCommand = new DelegateCommand(() => {
+
+            });
+            }
         #endregion
     }
 }
