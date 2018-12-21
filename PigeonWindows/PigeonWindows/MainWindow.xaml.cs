@@ -55,7 +55,11 @@ namespace PigeonWindows
         }
         public void AppendMessageRecord(string remoteIP, string message)
         {
-
+            var query = from user in MainWindowViewModel.Friends
+                        where user.UserIp == remoteIP
+                        select user;
+            User targetUser = query.First();
+            targetUser.Messages.Add(new PigeonWindows.Message(remoteIP,message));
         }
         public void InitClientList(List<User> list)
         {
