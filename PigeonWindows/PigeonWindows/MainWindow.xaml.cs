@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UDPClient;
+
 namespace PigeonWindows
 {
     /// <summary>
@@ -22,14 +23,16 @@ namespace PigeonWindows
     {
 
         //public String Message { set; get; }
+        public UdpHandler handler;
 
         public String MyName { set; get; }
 
         public MainWindow()
         {
             InitializeComponent();
-            new UdpHandler(this);
+            handler = new UdpHandler(this);
             this.DataContext = new MainWindowViewModel();
+            MyName = "ha";
         }
 
         private void NavBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
