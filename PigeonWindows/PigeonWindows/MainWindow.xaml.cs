@@ -49,6 +49,7 @@ namespace PigeonWindows
             var data = new Datagram(DatagramType.Chat.ToString(), MessageBox.Text);
             handler.SendMessage(friend.UserIp, "9966", data.ToString());
             
+            friend.Export();
         }
         public void UpdateClientList(string remoteIP, string name, bool isOnline)
         {
@@ -94,6 +95,15 @@ namespace PigeonWindows
                 }
             });
             Dispatcher.BeginInvoke(updateUI);
+        }
+
+        private void FriendList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            User friend = FriendList.SelectedItem as User;
+            friend.Import();
+            string str = friend.Messages.Text;
+            ShowBox.Document.Blocks.Clear();
+            ShowBox.AppendText(str);
         }
     }
 }

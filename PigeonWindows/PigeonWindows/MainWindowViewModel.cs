@@ -34,11 +34,11 @@ namespace PigeonWindows
             get { return nickname; }
             set { SetProperty(ref nickname, value); }
         }
-        private string massage;
-        public string Massage
+        private string message;
+        public string Message
         {
-            get { return massage; }
-            set { SetProperty(ref massage, value); }
+            get { return message; }
+            set { SetProperty(ref message, value); }
         }
         #endregion
 
@@ -87,18 +87,19 @@ namespace PigeonWindows
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
             });
+
             SelectItemChangedCommand = new DelegateCommand<object>((p) => {
                 ListView lv = p as ListView;
                 User friend = lv.SelectedItem as User;
                 Head = friend.Head;
                 Nickname = friend.UserName;
-                friend.Import();
             });
             
             AddCommand = new DelegateCommand(() => {
                 Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
             });
-            }
+
+        }
         #endregion
     }
 }
