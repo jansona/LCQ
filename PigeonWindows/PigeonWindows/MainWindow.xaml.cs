@@ -52,6 +52,7 @@ namespace PigeonWindows
                         );
             var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
             handler.SendMessage(friend.UserIp, "9966", data.ToString());
+            friend.Messages.Text = Message.Encrypt(textRange1.Text);
             friend.Export();
         }
         public void UpdateClientList(string remoteIP, string name, bool isOnline)
