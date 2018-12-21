@@ -22,6 +22,8 @@ namespace UDPClient
         public UdpHandler(MainWindow window):this()
         {
             mainWindow = window;
+
+            Broadcast(DatagramType.OnLine);
         }
 
         public UdpHandler()
@@ -35,9 +37,7 @@ namespace UDPClient
             IPEndPoint listenEndPoint = new IPEndPoint(localIp, int.Parse(ListenPort));
             receiveUpdClient = new UdpClient(listenEndPoint);
             Thread receiveThread = new Thread(ReceiveMessage);
-            receiveThread.Start();
-
-            Broadcast(DatagramType.OnLine);
+            receiveThread.Start();            
         }
 
         public void TestSend()
