@@ -24,12 +24,12 @@ namespace PigeonWindows
         {
             UserIp = Ip;
             UserName = Name;
-            //Messages = new List<Message>();
+            Messages =new Message();
             //Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg"));
         }
         public User()
         {
-            //Messages = new List<Message>();
+            Messages = new Message();
             //Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg"));
         }
 

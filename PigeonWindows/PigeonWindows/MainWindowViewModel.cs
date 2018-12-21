@@ -55,6 +55,11 @@ namespace PigeonWindows
             return users;
         }
         //当friends更新后，更新friends的ui
+
+
+       
+        //当关闭聊天界面时，导出聊天记录
+        
         #endregion
 
         #region constructor
@@ -78,6 +83,7 @@ namespace PigeonWindows
                 User friend = lv.SelectedItem as User;
                 Head = friend.Head;
                 Nickname = friend.UserName;
+                friend.Import();
             });
             AddCommand = new DelegateCommand(() => {
                 //Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
