@@ -59,7 +59,12 @@ namespace PigeonWindows
                 var query = from user in MainWindowViewModel.Friends
                             where user.UserIp == remoteIP
                             select user;
-                MainWindowViewModel.Friends.Remove(query.ToList()[0]);
+
+                Action updateUI = new Action(() =>
+                {
+                    MainWindowViewModel.Friends.Remove(query.ToList()[0]);
+                });
+                Dispatcher.BeginInvoke(updateUI);
             }
         }
         public void AppendMessageRecord(string remoteIP, string message)
@@ -68,14 +73,22 @@ namespace PigeonWindows
                         where user.UserIp == remoteIP
                         select user;
             User targetUser = query.First();
-            //targetUser.Messages.Add(new PigeonWindows.Message(remoteIP,message));
+            Action updateUI = new Action(() =>
+            {
+                targetUser.Messages.Text += ("\n" + message);
+            });
+            Dispatcher.BeginInvoke(updateUI);
         }
         public void InitClientList(List<User> list)
         {
-            foreach(User user in list)
+            Action updateUI = new Action(() =>
             {
-                MainWindowViewModel.Friends.Add(user);
-            }
+                foreach (User user in list)
+                {
+                    MainWindowViewModel.Friends.Add(user);
+                }
+            });
+            Dispatcher.BeginInvoke(updateUI);
         }
     }
 }
