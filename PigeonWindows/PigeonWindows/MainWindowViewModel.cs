@@ -93,8 +93,8 @@ namespace PigeonWindows
             //Friends.Add(new Friend() { Nickname = "欧阳铁柱", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon3.jpg")) });
             //Friends.Add(new Friend() { Nickname = "皇甫二妞", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon4.jpg")) });
             //Friends.Add(new Friend() { Nickname = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
-            Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")), Messages = new Message("幺妹！") });
-            Friends.Add(new User() { UserName = "me", UserIp = "192.168.43.131", Messages = new Message("mememe!") });
+            Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")), Messages = new Message("幺妹！" + '\n') });
+            Friends.Add(new User() { UserName = "me", UserIp = "192.168.43.131", Messages = new Message("mememe!" + '\n') });
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
                 window.handler.receiveUpdClient.Close();
