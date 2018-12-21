@@ -44,6 +44,8 @@ namespace PigeonWindows
             //handler.SendMessage("192.168.99.1", "19966", "test message");
             //textBox.Text = "send";
             //handler.TestSend();
+            ShowBox.AppendText(MessageBox.Text + '\n');
+            User friend = FriendList.SelectedItem as User;
         }
         public void UpdateClientList(string remoteIP, string name, bool isOnline)
         {

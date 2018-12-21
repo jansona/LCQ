@@ -53,7 +53,7 @@
                              Width="50"
                              Height="50">
                         <Ellipse.Fill>
-                            <SolidColorBrush Color="Red"/>
+                            <ImageBrush ImageSource="Images/account.png" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <Grid HorizontalAlignment="Center"
@@ -213,7 +213,6 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
 
-
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal"
@@ -251,9 +250,9 @@
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="57*"/>
-                    <RowDefinition Height="443*"/>
-                    <RowDefinition Height="142*"/>
+                    <RowDefinition Height="64*"/>
+                    <RowDefinition Height="501.6"/>
+                    <RowDefinition Height="161*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Margin="0,0,0,10">
                     <TextBlock HorizontalAlignment="Left" 
@@ -272,9 +271,17 @@
                         </Grid.ColumnDefinitions>
                     </Grid>
                 </Grid>
-                <RichTextBox x:Name="MessageBox" HorizontalAlignment="Left" Height="92" Margin="10,9.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="832"/>
-                <Button Content="发送" HorizontalAlignment="Left" Margin="767,118.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Command="{Binding AddCommand}"/>
-                <RichTextBox x:Name="ShowBox" HorizontalAlignment="Left" Height="491" Margin="10,0.2,0,0"  VerticalAlignment="Top" Width="832" SpellCheck.IsEnabled="True" Grid.Row="1"/>
+                <TextBox x:Name="MessageBox" HorizontalAlignment="Left" Height="92" Margin="10,9.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="832" />
+                <Button Content="发送" HorizontalAlignment="Left" Margin="767,118.4,0,10.4" Grid.Row="2" Width="75" Height="Auto" Click="Button_Click"/>
+                <ScrollViewer Height="502" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="852" Grid.RowSpan="2">
+                    <RichTextBox x:Name="ShowBox" Height="489" Width="839" IsReadOnly="True">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="{Binding Message}"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </ScrollViewer>
             </Grid>
         </Grid>
     </Grid>
