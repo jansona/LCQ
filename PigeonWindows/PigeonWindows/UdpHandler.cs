@@ -22,6 +22,7 @@ namespace UDPClient
         public UdpHandler(MainWindow window):this()
         {
             mainWindow = window;
+            //Broadcast(DatagramType.OnLine);
         }
 
         public UdpHandler()
@@ -36,6 +37,7 @@ namespace UDPClient
             receiveUpdClient = new UdpClient(listenEndPoint);
             Thread receiveThread = new Thread(ReceiveMessage);
             receiveThread.Start();
+
         }
 
         public void TestSend()
@@ -72,9 +74,8 @@ namespace UDPClient
 
                     string message = Encoding.Unicode.GetString(receiveBytes);
 
-                    // 显示消息内容
-                    //Action<MainWindow> updateUI = new Action<MainWindow>((w) => { w.Response(message); });
-                    //MainWindow.Dispatcher.BeginInvoke(updateUI, MainWindow);
+                    string sss = remoteIpEndPoint.Address.ToString();
+                    Datagram.Convert(message, remoteIpEndPoint.Address.ToString(), mainWindow);
 
                 }
                 catch
@@ -84,50 +85,74 @@ namespace UDPClient
             }
         }
 
-        public IPAddress[] BroadcastAndReceive()
+        public void Broadcast(DatagramType type)
         {
-            IPAddress[] userList;
+            //IPAddress[] userList;
             
-            string announcement = "ONLINE";
-            byte[] sendbytes = Encoding.Unicode.GetBytes(announcement);
+            //string announcement = "ONLINE";
+            byte[] sendbytes = Encoding.Unicode.GetBytes(
+                new Datagram(type.ToString(), mainWindow.MyName).ToString());
             IPEndPoint remoteIPEndPoint = new IPEndPoint(IPAddress.Broadcast,
                 int.Parse(ListenPort));
             sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);
 
-            remoteIPEndPoint = new IPEndPoint(IPAddress.Any, 19966);
-            byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIPEndPoint);
-            string message = Encoding.Unicode.GetString(receiveBytes);
+            //remoteIPEndPoint = new IPEndPoint(IPAddress.Any, 19966);
+            //byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIPEndPoint);
+            //string message = Encoding.Unicode.GetString(receiveBytes);
 
-            userList = new IPAddress[5];    //xjb写的，留着等黄卜江负责的解析接口
+            // userList = new IPAddress[5];    //xjb写的，留着等黄卜江负责的解析接口
 
-            return userList;
+            //return userList;
         }
 
 
 
         public static string GetLocalIP()
         {
-            string result = RunApp("route", "print", true);
-            Match m = Regex.Match(result, @"0.0.0.0\s+0.0.0.0\s+(\d+.\d+.\d+.\d+)\s+(\d+.\d+.\d+.\d+)");
-            if (m.Success)
+            try
             {
-                return m.Groups[2].Value;
+
+                string HostName = Dns.GetHostName(); //得到主机名
+                IPHostEntry IpEntry = Dns.GetHostEntry(HostName);
+                for (int i = 0; i < IpEntry.AddressList.Length; i++)
+                {
+                    //从IP地址列表中筛选出IPv4类型的IP地址
+                    //AddressFamily.InterNetwork表示此IP为IPv4,
+                    //AddressFamily.InterNetworkV6表示此地址为IPv6类型
+                    if (IpEntry.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        string ip = "";
+                        ip = IpEntry.AddressList[i].ToString();
+                        return IpEntry.AddressList[i].ToString();
+                    }
+                }
+                return "";
             }
-            else
+            catch (Exception ex)
             {
-                try
-                {
-                    System.Net.Sockets.TcpClient c = new System.Net.Sockets.TcpClient();
-                    c.Connect("www.baidu.com", 80);
-                    string ip = ((System.Net.IPEndPoint)c.Client.LocalEndPoint).Address.ToString();
-                    c.Close();
-                    return ip;
-                }
-                catch (Exception)
-                {
-                    return null;
-                }
+                return ex.Message;
             }
+            //string result = RunApp("route", "print", true);
+            //Match m = Regex.Match(result, @"0.0.0.0\s+0.0.0.0\s+(\d+.\d+.\d+.\d+)\s+(\d+.\d+.\d+.\d+)");
+            //if (m.Success)
+            //{
+            //    return m.Groups[2].Value;
+            //}
+            //else
+            //{
+            //    try
+            //    {
+            //        System.Net.Sockets.TcpClient c = new System.Net.Sockets.TcpClient();
+            //        c.Connect("www.baidu.com", 80);
+            //        string ip = ((System.Net.IPEndPoint)c.Client.LocalEndPoint).Address.ToString();
+            //        c.Close();
+            //        return ip;
+            //    }
+            //    catch (Exception)
+            //    {
+            //        return null;
+            //    }
+            //}
         }
 
         public static string RunApp(string filename, string arguments, bool recordLog)

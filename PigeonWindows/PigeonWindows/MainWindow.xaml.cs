@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UDPClient;
 
 namespace PigeonWindows
 {
@@ -21,12 +22,17 @@ namespace PigeonWindows
     public partial class MainWindow : Window
     {
 
-        public String Message { set; get; }
+        //public String Message { set; get; }
+        public UdpHandler handler;
+
+        public String MyName { set; get; }
 
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
+            MyName = "ha";
+            handler = new UdpHandler(this);
+            this.DataContext = new MainWindowViewModel(this);
         }
 
         private void NavBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -60,7 +66,7 @@ namespace PigeonWindows
                         where user.UserIp == remoteIP
                         select user;
             User targetUser = query.First();
-            targetUser.Messages.Add(new PigeonWindows.Message(remoteIP,message));
+            //targetUser.Messages.Add(new PigeonWindows.Message(remoteIP,message));
         }
         public void InitClientList(List<User> list)
         {

@@ -30,7 +30,7 @@ namespace PigeonWindows
         {
             StringBuilder sb = new StringBuilder();
             sb.Append((int)this.Type);
-            sb.Append(this.Message.ToString());
+            sb.Append(this.Message);
             return sb.ToString();
         }
 
@@ -109,7 +109,7 @@ namespace PigeonWindows
                     window.UpdateClientList(ip,data.Message, true);
                     break;
                 case 2:
-                    window.UpdateClientList(ip,data.Message, true);
+                    window.UpdateClientList(ip,data.Message, false);
                     break;
                 case 3:
                     window.AppendMessageRecord(ip, data.Message);

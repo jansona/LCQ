@@ -17,6 +17,8 @@ namespace PigeonWindows
     class MainWindowViewModel : BindableBase
     {
 
+        public MainWindow window { get; set; }
+
         #region attributes
         public static ObservableCollection<User> Friends { get; set; }
         //名片中的头像和昵称数据源
@@ -32,12 +34,6 @@ namespace PigeonWindows
             get { return nickname; }
             set { SetProperty(ref nickname, value); }
         }
-        private string massage;
-        public string Massage
-        {
-            get { return massage; }
-            set { SetProperty(ref massage, value); }
-        }
         #endregion
 
         #region delegates
@@ -47,8 +43,6 @@ namespace PigeonWindows
         public DelegateCommand CloseCommand { get; set; }
         //添加好友
         public DelegateCommand AddCommand { get; set; }
-        //发送消息
-        public DelegateCommand SendCommand { get; set; }
         #endregion
 
         #region public
@@ -61,11 +55,18 @@ namespace PigeonWindows
             return users;
         }
         //当friends更新后，更新friends的ui
+
+
+       
+        //当关闭聊天界面时，导出聊天记录
+        
         #endregion
 
         #region constructor
-        public MainWindowViewModel()
+        public MainWindowViewModel(MainWindow window)
         {
+            this.window = window;
+
             Friends = new ObservableCollection<User>();
             //Friends.Add(new Friend() { Nickname = "Fear of god!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg")) });
             //Friends.Add(new Friend() { Nickname = "Fear of goddness!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon2.jpg")) });
@@ -82,15 +83,13 @@ namespace PigeonWindows
                 User friend = lv.SelectedItem as User;
                 Head = friend.Head;
                 Nickname = friend.UserName;
+                friend.Import();
             });
-            
             AddCommand = new DelegateCommand(() => {
                 //Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
+                window.handler.Broadcast(DatagramType.OnLine);
             });
-            SendCommand = new DelegateCommand(() => {
-
-            });
-            }
+        }
         #endregion
     }
 }

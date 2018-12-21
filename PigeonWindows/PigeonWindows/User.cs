@@ -19,17 +19,17 @@ namespace PigeonWindows
         public string UserName { get; set; }
         public BitmapImage Head { get; set; }
         //键是对方的ip地址，值是text文本内容
-        public List<Message> Messages { get; set; }
+        public Message Messages { get; set; }
         public User(string Ip, string Name)
         {
             UserIp = Ip;
             UserName = Name;
-            Messages = new List<Message>();
+            Messages =new Message();
             //Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg"));
         }
         public User()
         {
-            Messages = new List<Message>();
+            Messages = new Message();
             //Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg"));
         }
 
@@ -49,7 +49,7 @@ namespace PigeonWindows
         }
         public void Export()
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Message>));
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Message));
             string xmlFileName = UserName + "message" + ".xml";
             XmlSerialize(xmlSerializer, xmlFileName, Messages);
             Console.WriteLine("已保存所有数据");
@@ -57,21 +57,21 @@ namespace PigeonWindows
         public void Import()
         {
             if (!File.Exists(UserName + "message" + ".xml")) { Console.WriteLine("导入失败，本地无数据"); return; }
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Message>));
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Message));
             FileStream fs = new FileStream(UserName + "message" + ".xml", FileMode.Open, FileAccess.Read);
-            List<Message> temp;
+            Message temp;
             try
             {
-                temp = (List<Message>)xmlSerializer.Deserialize(fs);
+                temp = (Message)xmlSerializer.Deserialize(fs);
             }
             finally
             {
                 fs.Close();
             }
-            foreach (Message message in temp)
-            {
-                Messages.Add(message);
-            }
+
+
+            Messages = temp;
+
             Console.WriteLine("导入成功！");
         }
     }
