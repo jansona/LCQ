@@ -46,7 +46,6 @@ namespace PigeonWindows
             //handler.TestSend();
             //ShowBox.AppendText(MessageBox.Text + '\n');
             User friend = FriendList.SelectedItem as User;
-
             TextRange textRange1 = new TextRange(
                         MessageBox.Document.ContentStart,
                         MessageBox.Document.ContentEnd
@@ -55,6 +54,7 @@ namespace PigeonWindows
             handler.SendMessage(friend.UserIp, "9966", data.ToString());
             friend.Messages.Text += textRange1.Text;
             friend.Export();
+            MessageBox.Document.Blocks.Clear();
         }
         public void UpdateClientList(string remoteIP, string name, bool isOnline)
         {
