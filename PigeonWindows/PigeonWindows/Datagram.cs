@@ -30,7 +30,7 @@ namespace PigeonWindows
         {
             StringBuilder sb = new StringBuilder();
             sb.Append((int)this.Type);
-            sb.Append(this.Message.ToString());
+            sb.Append(this.Message);
             return sb.ToString();
         }
 
