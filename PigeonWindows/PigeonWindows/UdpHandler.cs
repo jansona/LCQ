@@ -78,8 +78,9 @@ namespace UDPClient
                     Datagram.Convert(message, remoteIpEndPoint.Address.ToString(), mainWindow);
 
                 }
-                catch
+                catch(Exception e)
                 {
+                    Console.WriteLine(e.Message);
                     break;
                 }
             }
