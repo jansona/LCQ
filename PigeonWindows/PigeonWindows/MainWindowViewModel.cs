@@ -17,6 +17,8 @@ namespace PigeonWindows
     class MainWindowViewModel : BindableBase
     {
 
+        public MainWindow window { get; set; }
+
         #region attributes
         public static ObservableCollection<User> Friends { get; set; }
         //名片中的头像和昵称数据源
@@ -61,8 +63,10 @@ namespace PigeonWindows
         #endregion
 
         #region constructor
-        public MainWindowViewModel()
+        public MainWindowViewModel(MainWindow window)
         {
+            this.window = window;
+
             Friends = new ObservableCollection<User>();
             //Friends.Add(new Friend() { Nickname = "Fear of god!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg")) });
             //Friends.Add(new Friend() { Nickname = "Fear of goddness!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon2.jpg")) });
@@ -82,7 +86,8 @@ namespace PigeonWindows
                 friend.Import();
             });
             AddCommand = new DelegateCommand(() => {
-                Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
+                //Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
+                window.handler.Broadcast(DatagramType.OnLine);
             });
         }
         #endregion

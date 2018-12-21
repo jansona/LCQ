@@ -30,10 +30,9 @@ namespace PigeonWindows
         public MainWindow()
         {
             InitializeComponent();
-            MyName = "cao";
+            MyName = "ha";
             handler = new UdpHandler(this);
-            this.DataContext = new MainWindowViewModel();
-           
+            this.DataContext = new MainWindowViewModel(this);
         }
 
         private void NavBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
