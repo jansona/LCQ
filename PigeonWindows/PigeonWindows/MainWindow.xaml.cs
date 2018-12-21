@@ -29,10 +29,10 @@ namespace PigeonWindows
 
         public MainWindow()
         {
+            MyName = "ha";
             InitializeComponent();
             handler = new UdpHandler(this);
             this.DataContext = new MainWindowViewModel(this);
-            MyName = "ha";
         }
 
         private void NavBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -46,12 +46,14 @@ namespace PigeonWindows
             //handler.TestSend();
             //ShowBox.AppendText(MessageBox.Text + '\n');
             User friend = FriendList.SelectedItem as User;
+
             TextRange textRange1 = new TextRange(
                         MessageBox.Document.ContentStart,
                         MessageBox.Document.ContentEnd
                         );
             var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
             handler.SendMessage(friend.UserIp, "9966", data.ToString());
+            friend.Messages.Text = Message.Encrypt(textRange1.Text);
             friend.Export();
         }
         public void UpdateClientList(string remoteIP, string name, bool isOnline)
