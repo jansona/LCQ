@@ -49,7 +49,11 @@ namespace PigeonWindows
         {
             if (isOnline)
             {
-                MainWindowViewModel.Friends.Add(new User(remoteIP, name));
+                //MainWindowViewModel.Friends.Add(new User(remoteIP, name));
+
+                Action updateUI = new Action(() => { MainWindowViewModel.Friends.Add(new User(remoteIP, name)); });
+                Dispatcher.BeginInvoke(updateUI);
+              
             }
             else
             {

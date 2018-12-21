@@ -62,12 +62,13 @@ namespace UDPClient
             //MainWindow.Dispatcher.BeginInvoke(updateUI, MainWindow);
         }
 
+        public delegate void UpdateUIDelegate(string message, string ip, MainWindow window);
         private void ReceiveMessage()
         {
             IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, 9966);
             while (true)
             {
-                try
+                //try
                 {
                     // 关闭receiveUdpClient时此时会产生异常
                     byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIpEndPoint);
@@ -77,14 +78,25 @@ namespace UDPClient
                     string sss = remoteIpEndPoint.Address.ToString();
                     Datagram.Convert(message, remoteIpEndPoint.Address.ToString(), mainWindow);
 
+                    //UpdateUIDelegate updateUIDelegate = new UpdateUIDelegate(update);
+
+                    //通过调用委托
+                    //this.lstView.Dispatcher.Invoke(updateUIDelegate, Item, NewItem);
+
                 }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    break;
-                }
+                //catch(Exception e)
+                //{
+                //    Console.WriteLine(e.Message);
+                //    break;
+                //}
             }
         }
+
+        private void update(string message,string ip,MainWindow window)
+        {
+            
+        }
+
 
         public void Broadcast(DatagramType type)
         {
