@@ -99,15 +99,5 @@ namespace PigeonWindows
             });
             Dispatcher.BeginInvoke(updateUI);
         }
-
-        private void FriendList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            User friend = FriendList.SelectedItem as User;
-            friend.Import();
-            string str = friend.Messages.Text;
-            ShowBox.Document.Blocks.Clear();
-            ShowBox.AppendText(str);
-        }
-
     }
 }

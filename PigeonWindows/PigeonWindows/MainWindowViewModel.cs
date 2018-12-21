@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.ComponentModel;
 
 namespace PigeonWindows
 {
@@ -38,7 +39,10 @@ namespace PigeonWindows
         public string Message
         {
             get { return message; }
-            set { SetProperty(ref message, value); }
+            set
+            {
+                SetProperty(ref message, value);
+            }
         }
         #endregion
 
@@ -81,9 +85,14 @@ namespace PigeonWindows
             //Friends.Add(new Friend() { Nickname = "欧阳铁柱", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon3.jpg")) });
             //Friends.Add(new Friend() { Nickname = "皇甫二妞", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon4.jpg")) });
             //Friends.Add(new Friend() { Nickname = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
-            Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
-            Friends.Add(new User() { UserName = "me", UserIp= "192.168.43.131" });
-
+            //Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
+            //Friends.Add(new User() { UserName = "me", UserIp= "192.168.43.131" });
+            User user1 = new User("192.168.43.131", "me");
+            User user2 = new User();
+            user1.Messages.Text = "我的聊天纪录";
+            user2.UserName = "幺妹"; user2.Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg"));
+            user2.Messages.Text = "幺妹的聊天纪录";
+            Friends.Add(user1); Friends.Add(user2);
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
                 window.handler.receiveUpdClient.Close();
@@ -95,6 +104,7 @@ namespace PigeonWindows
                 User friend = lv.SelectedItem as User;
                 Head = friend.Head;
                 Nickname = friend.UserName;
+                Message = friend.Messages.Text;
             });
             
             AddCommand = new DelegateCommand(() => {
