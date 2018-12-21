@@ -46,6 +46,7 @@ namespace PigeonWindows
             //handler.TestSend();
             ShowBox.AppendText(MessageBox.Text + '\n');
             User friend = FriendList.SelectedItem as User;
+            friend.Export();
         }
         public void UpdateClientList(string remoteIP, string name, bool isOnline)
         {
@@ -75,6 +76,15 @@ namespace PigeonWindows
             {
                 MainWindowViewModel.Friends.Add(user);
             }
+        }
+
+        private void FriendList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            User friend = FriendList.SelectedItem as User;
+            friend.Import();
+            string str = friend.Messages.Text;
+            ShowBox.Document.Blocks.Clear();
+            ShowBox.AppendText(str);
         }
     }
 }
