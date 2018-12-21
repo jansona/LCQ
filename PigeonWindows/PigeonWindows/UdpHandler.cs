@@ -13,8 +13,8 @@ namespace UDPClient
     {
         private MainWindow mainWindow;
 
-        private UdpClient sendUdpClient;
-        private UdpClient receiveUpdClient;
+        public UdpClient sendUdpClient;
+        public UdpClient receiveUpdClient;
         
         public String SendPort { set; get; }
         public String ListenPort { set; get; }
