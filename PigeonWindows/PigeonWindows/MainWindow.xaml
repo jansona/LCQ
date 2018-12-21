@@ -276,7 +276,9 @@
                 <ScrollViewer Height="502" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="852" Grid.RowSpan="2">
                     <RichTextBox x:Name="ShowBox" Height="489" Width="839" IsReadOnly="True">
                         <FlowDocument>
-
+                            <Paragraph>
+                                <Run Text="{Binding Message}"/>
+                            </Paragraph>
                         </FlowDocument>
                     </RichTextBox>
                 </ScrollViewer>
