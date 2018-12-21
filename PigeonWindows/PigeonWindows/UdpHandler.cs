@@ -22,7 +22,7 @@ namespace UDPClient
         public UdpHandler(MainWindow window):this()
         {
             mainWindow = window;
-            Broadcast(DatagramType.OnLine);
+            //Broadcast(DatagramType.OnLine);
         }
 
         public UdpHandler()
