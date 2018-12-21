@@ -39,17 +39,30 @@ namespace PigeonWindows
             //textBox.Text = "send";
             //handler.TestSend();
         }
-        private void UpdateClientList(string remoteIP, bool isOnline)
+        public void UpdateClientList(string remoteIP, string name, bool isOnline)
+        {
+            if (isOnline)
+            {
+                MainWindowViewModel.Friends.Add(new User(remoteIP, name));
+            }
+            else
+            {
+                var query = from user in MainWindowViewModel.Friends
+                            where user.UserIp == remoteIP
+                            select user;
+                MainWindowViewModel.Friends.Remove(query.ToList()[0]);
+            }
+        }
+        public void AppendMessageRecord(string remoteIP, string message)
         {
 
         }
-        private void AppendMessageRecord(string remoteIP, string message)
+        public void InitClientList(List<User> list)
         {
-
-        }
-        private void InitClientList()
-        {
-
+            foreach(User user in list)
+            {
+                MainWindowViewModel.Friends.Add(user);
+            }
         }
     }
 }
