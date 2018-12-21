@@ -86,6 +86,8 @@ namespace PigeonWindows
 
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
+                window.handler.receiveUpdClient.Close();
+                window.handler.sendUdpClient.Close();
             });
 
             SelectItemChangedCommand = new DelegateCommand<object>((p) => {
