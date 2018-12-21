@@ -272,7 +272,7 @@
                         </Grid.ColumnDefinitions>
                     </Grid>
                 </Grid>
-                <RichTextBox x:Name="MessageBox" HorizontalAlignment="Left" Height="92" Margin="10,9.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="832"/>
+                <TextBox x:Name="MessageBox" HorizontalAlignment="Left" Height="92" Margin="10,9.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="832"/>
                 <Button Content="发送" HorizontalAlignment="Left" Margin="767,118.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Command="{Binding AddCommand}" Click="Button_Click"/>
                 <RichTextBox x:Name="ShowBox" HorizontalAlignment="Left" Height="491" Margin="10,0.2,0,0"  VerticalAlignment="Top" Width="832" SpellCheck.IsEnabled="True" Grid.Row="1"/>
             </Grid>

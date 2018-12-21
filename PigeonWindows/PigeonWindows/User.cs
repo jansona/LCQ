@@ -71,7 +71,7 @@ namespace PigeonWindows
 
 
             Messages = temp;
-
+            Messages.Text = Message.Decrypt(Messages.Text);
             Console.WriteLine("导入成功！");
         }
     }
