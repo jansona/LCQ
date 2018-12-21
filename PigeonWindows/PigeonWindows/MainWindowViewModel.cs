@@ -17,18 +17,6 @@ namespace PigeonWindows
     class MainWindowViewModel : BindableBase
     {
 
-        //#region class
-        //public class Friend
-        //{
-        //    public string Nickname { get; set; }
-        //    public BitmapImage Head { get; set; }
-        //    public Friend(string name) {
-        //        Nickname = name;
-        //       // Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg"));
-        //    }
-        //}
-        //#endregion
-
         #region attributes
         public static ObservableCollection<User> Friends { get; set; }
         //名片中的头像和昵称数据源
@@ -51,8 +39,11 @@ namespace PigeonWindows
         public DelegateCommand<object> SelectItemChangedCommand { get; set; }
         //窗口关闭
         public DelegateCommand CloseCommand { get; set; }
+        //添加好友
+        public DelegateCommand AddCommand { get; set; }
         #endregion
 
+        #region public
         //更新friends
         public  List<User> FriendsChange(List<User> users) {
             Friends.Clear();
@@ -62,6 +53,7 @@ namespace PigeonWindows
             return users;
         }
         //当friends更新后，更新friends的ui
+        #endregion
 
         #region constructor
         public MainWindowViewModel()
@@ -72,7 +64,7 @@ namespace PigeonWindows
             //Friends.Add(new Friend() { Nickname = "欧阳铁柱", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon3.jpg")) });
             //Friends.Add(new Friend() { Nickname = "皇甫二妞", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon4.jpg")) });
             //Friends.Add(new Friend() { Nickname = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
-            //Friends.Add(new Friend() { Nickname = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
+            Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
 
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
@@ -82,6 +74,9 @@ namespace PigeonWindows
                 User friend = lv.SelectedItem as User;
                 Head = friend.Head;
                 Nickname = friend.UserName;
+            });
+            AddCommand = new DelegateCommand(() => {
+                Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
             });
         }
         #endregion
