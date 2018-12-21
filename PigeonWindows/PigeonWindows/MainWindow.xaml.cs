@@ -31,7 +31,7 @@ namespace PigeonWindows
         {
             InitializeComponent();
             handler = new UdpHandler(this);
-            this.DataContext = new MainWindowViewModel();
+            this.DataContext = new MainWindowViewModel(this);
             MyName = "ha";
         }
 
@@ -44,8 +44,11 @@ namespace PigeonWindows
             //handler.SendMessage("192.168.99.1", "19966", "test message");
             //textBox.Text = "send";
             //handler.TestSend();
-            ShowBox.AppendText(MessageBox.Text + '\n');
+            //ShowBox.AppendText(MessageBox.Text + '\n');
             User friend = FriendList.SelectedItem as User;
+            var data = new Datagram(DatagramType.Chat.ToString(), MessageBox.Text);
+            handler.SendMessage(friend.UserIp, "9966", data.ToString());
+            
         }
         public void UpdateClientList(string remoteIP, string name, bool isOnline)
         {

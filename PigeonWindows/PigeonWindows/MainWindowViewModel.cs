@@ -82,6 +82,7 @@ namespace PigeonWindows
             //Friends.Add(new Friend() { Nickname = "皇甫二妞", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon4.jpg")) });
             //Friends.Add(new Friend() { Nickname = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
             Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
+            Friends.Add(new User() { UserName = "me", UserIp= "192.168.43.131" });
 
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
