@@ -41,6 +41,8 @@ namespace PigeonWindows
         public DelegateCommand CloseCommand { get; set; }
         //添加好友
         public DelegateCommand AddCommand { get; set; }
+        //
+        public DelegateCommand<object> SendMessageCommend { get; set; }
         #endregion
 
         #region public
@@ -65,6 +67,7 @@ namespace PigeonWindows
             //Friends.Add(new Friend() { Nickname = "皇甫二妞", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon4.jpg")) });
             //Friends.Add(new Friend() { Nickname = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
             Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
+            
 
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
@@ -74,9 +77,16 @@ namespace PigeonWindows
                 User friend = lv.SelectedItem as User;
                 Head = friend.Head;
                 Nickname = friend.UserName;
+
             });
             AddCommand = new DelegateCommand(() => {
                 Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
+            });
+            SendMessageCommend =new DelegateCommand<object>((p) => {
+                ListView lv = p as ListView;
+                User friend = lv.SelectedItem as User;
+                Message message = new Message();
+                friend.Messages.Add(message);
             });
         }
         #endregion

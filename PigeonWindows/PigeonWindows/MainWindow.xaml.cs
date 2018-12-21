@@ -27,6 +27,7 @@ namespace PigeonWindows
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
+            
         }
 
         private void NavBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -35,6 +36,7 @@ namespace PigeonWindows
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            ShowBox.AppendText("abc");
             //handler.SendMessage("192.168.99.1", "19966", "test message");
             //textBox.Text = "send";
             //handler.TestSend();
