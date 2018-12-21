@@ -21,7 +21,9 @@ namespace PigeonWindows
     public partial class MainWindow : Window
     {
 
-        public String Message { set; get; }
+        //public String Message { set; get; }
+
+        public String MyName { set; get; }
 
         public MainWindow()
         {
