@@ -46,11 +46,11 @@ namespace PigeonWindows
             //handler.TestSend();
             //ShowBox.AppendText(MessageBox.Text + '\n');
             User friend = FriendList.SelectedItem as User;
-            TextRange textRange = new TextRange(
+            TextRange textRange1 = new TextRange(
                         MessageBox.Document.ContentStart,
                         MessageBox.Document.ContentEnd
                         );
-            var data = new Datagram(DatagramType.Chat.ToString(), textRange.Text);
+            var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
             handler.SendMessage(friend.UserIp, "9966", data.ToString());
             friend.Export();
         }
