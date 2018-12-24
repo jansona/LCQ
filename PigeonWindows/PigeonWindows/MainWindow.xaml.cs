@@ -87,7 +87,7 @@ namespace PigeonWindows
             User targetUser = query.First();
             Action updateUI = new Action(() =>
             {
-                targetUser.Messages.Text += ("\n" + message);
+                targetUser.Messages.Text += (targetUser.UserName + " : " + message + "\n");
             });
             Dispatcher.BeginInvoke(updateUI);
         }
