@@ -87,9 +87,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Datagram.cs" />
-    <Compile Include="Message.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="communication\Datagram.cs" />
+    <Compile Include="communication\Message.cs" />
+    <Compile Include="client\User.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -98,7 +98,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UdpHandler.cs" />
+    <Compile Include="client\UdpHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -132,7 +132,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ui\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\account.png" />
   </ItemGroup>
