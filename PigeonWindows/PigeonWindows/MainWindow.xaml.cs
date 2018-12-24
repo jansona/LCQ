@@ -87,7 +87,10 @@ namespace PigeonWindows
             User targetUser = query.First();
             Action updateUI = new Action(() =>
             {
+                MessageBox.BeginChange();
                 targetUser.Messages.Text += (targetUser.UserName + " : " + message + "\n");
+                MessageBox.EndChange();
+                MessageBox.UpdateLayout();
             });
             Dispatcher.BeginInvoke(updateUI);
         }
@@ -101,6 +104,15 @@ namespace PigeonWindows
                 }
             });
             Dispatcher.BeginInvoke(updateUI);
+        }
+
+        private void MessageBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                Button_Click(this, new RoutedEventArgs());
+                MessageBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+            }
         }
     }
 }
