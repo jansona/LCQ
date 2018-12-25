@@ -49,6 +49,7 @@ namespace PigeonWindows
         }
         public void Export()
         {
+            Messages.Text = Message.Encrypt(Messages.Text);
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Message));
             string xmlFileName = UserName + "message" + ".xml";
             XmlSerialize(xmlSerializer, xmlFileName, Messages);

@@ -109,6 +109,7 @@ namespace PigeonWindows
                 Friend = lv.SelectedItem as User;
                 Head = Friend.Head;
                 Nickname = Friend.UserName;
+                Friend.Import();
                 Message = Friend.Messages.Text;
             });
             
