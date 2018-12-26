@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="D:\C#Projects\LCQ1\PigeonWindows\PigeonWindows\Images\Login.jpg"/>
+            <ImageBrush ImageSource="pack://application:,,,/Images/Login.jpg"/>
         </Grid.Background>
 
         <!-- Login button -->
