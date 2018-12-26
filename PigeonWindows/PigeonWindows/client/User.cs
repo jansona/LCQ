@@ -54,6 +54,7 @@ namespace PigeonWindows
             string xmlFileName = UserName + "message" + ".xml";
             XmlSerialize(xmlSerializer, xmlFileName, Messages);
             Console.WriteLine("已保存所有数据");
+            Messages.Text = Message.Decrypt(Messages.Text);
         }
         public void Import()
         {

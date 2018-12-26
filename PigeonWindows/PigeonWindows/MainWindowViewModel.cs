@@ -118,7 +118,7 @@ namespace PigeonWindows
             });
 
             SendMessageCommand = new DelegateCommand(() => {
-                Message = Friend.Messages.Text;
+               Message =Friend.Messages.Text;
             });
         }
         #endregion

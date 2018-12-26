@@ -49,20 +49,25 @@ namespace PigeonWindows
         {
             DESCryptoServiceProvider descsp = new DESCryptoServiceProvider();     
 
-            byte[] key = Encoding.Unicode.GetBytes(encryptKey); 
+            byte[] key = Encoding.Unicode.GetBytes(encryptKey);
 
-            byte[] data = Convert.FromBase64String(str); 
+            try
+            {
+                byte[] data = Convert.FromBase64String(str);
+                MemoryStream MStream = new MemoryStream();
 
-            MemoryStream MStream = new MemoryStream();   
+                //使用内存流实例化解密流对象       
+                CryptoStream CStream = new CryptoStream(MStream, descsp.CreateDecryptor(key, key), CryptoStreamMode.Write);
 
-            //使用内存流实例化解密流对象       
-            CryptoStream CStream = new CryptoStream(MStream, descsp.CreateDecryptor(key, key), CryptoStreamMode.Write);
+                CStream.Write(data, 0, data.Length);
 
-            CStream.Write(data, 0, data.Length);     
+                CStream.FlushFinalBlock();
 
-            CStream.FlushFinalBlock(); 
-
-            return Encoding.Unicode.GetString(MStream.ToArray());       //返回解密后的字符串  
+                return Encoding.Unicode.GetString(MStream.ToArray());       //返回解密后的字符串  
+            }
+            catch {
+                return "";
+            }
         }
 
     }
