@@ -24,7 +24,7 @@ namespace PigeonWindows
         {
             UserIp = Ip;
             UserName = Name;
-            Messages = new Message();
+            Messages =new Message();
             //Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg"));
         }
         public User()
@@ -32,7 +32,6 @@ namespace PigeonWindows
             Messages = new Message();
             //Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg"));
         }
-
 
 
 
@@ -50,6 +49,7 @@ namespace PigeonWindows
         }
         public void Export()
         {
+            Messages.Text = Message.Encrypt(Messages.Text);
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Message));
             string xmlFileName = UserName + "message" + ".xml";
             XmlSerialize(xmlSerializer, xmlFileName, Messages);
@@ -72,7 +72,7 @@ namespace PigeonWindows
 
 
             Messages = temp;
-
+            Messages.Text = Message.Decrypt(Messages.Text);
             Console.WriteLine("导入成功！");
         }
     }

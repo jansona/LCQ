@@ -11,8 +11,8 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Height="800"
-        Width="1100">
+        Height="400"
+        Width="550">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="37*" />
@@ -21,76 +21,76 @@
         <Grid Grid.Row="0">
             <materialDesign:ColorZone Mode="PrimaryMid"
                                       Name="NavBar"
-                                      Height="65"
+                                      Height="32.5"
                                       MouseLeftButtonDown="NavBar_MouseLeftButtonDown"
                                       materialDesign:ShadowAssist.ShadowDepth="Depth3">
 
                 <Grid>
                     <!--第三个多边形-->
-                    <Polygon Points="780,0 1100,0 1100,65 723,65 "
+                    <Polygon Points="390,0 550,0 550,32.5 361.5,32.5 "
                              StrokeThickness="1">
                         <Polygon.Fill>
                             <SolidColorBrush Color="#3448A1" />
                         </Polygon.Fill>
                     </Polygon>
                     <!--第二个多边形-->
-                    <Polygon Points="700,0 780,0 740,50 "
+                    <Polygon Points="350,0 390,0 370,25 "
                              StrokeThickness="1">
                         <Polygon.Fill>
                             <SolidColorBrush Color="#3E58C9" />
                         </Polygon.Fill>
                     </Polygon>
                     <!--第一个多边形-->
-                    <Polygon Points="0,0 700,0 756,65 0,65"
+                    <Polygon Points="0,0 350,0 378,32.5 0,32.5"
                              StrokeThickness="1">
                         <Polygon.Fill>
                             <SolidColorBrush Color="#1C93EC" />
                         </Polygon.Fill>
                     </Polygon>
                     <Ellipse Cursor="Hand"
-                             HorizontalAlignment="Left"
-                             Margin="10 5"
-                             Width="50"
-                             Height="50">
+                             HorizontalAlignment="Right"
+                             Margin="0,0,520,3.9"
+                             Width="25"
+                             Height="25" VerticalAlignment="Bottom">
                         <Ellipse.Fill>
-                            <ImageBrush  ImageSource="Images/account.png" />
+                            <ImageBrush ImageSource="Images/account.png" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <Grid HorizontalAlignment="Center"
-                          Width="200">
+                          Width="100">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
-                            <Button Width="60"
-                                    Height="60"
+                            <Button Width="30"
+                                    Height="30"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Padding="0">
-                                <Viewbox Width="30"
-                                         Height="30">
-                                    <Canvas Width="24"
-                                            Height="24">
+                                <Viewbox Width="15"
+                                         Height="15">
+                                    <Canvas Width="15"
+                                            Height="15">
                                         <Path Data="M17,12V3A1,1 0 0,0 16,2H3A1,1 0 0,0 2,3V17L6,13H16A1,1 0 0,0 17,12M21,6H19V15H6V17A1,1 0 0,0 7,18H18L22,22V7A1,1 0 0,0 21,6Z"
-                                              Fill="White" />
+                                              Fill="White" RenderTransformOrigin="0.211,0.07" />
                                     </Canvas>
                                 </Viewbox>
                             </Button>
                         </Grid>
                         <Grid Grid.Column="1">
-                            <Button Width="60"
-                                    Height="60"
+                            <Button Width="30"
+                                    Height="30"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Padding="0">
-                                <Viewbox Width="30"
-                                         Height="30">
-                                    <Canvas Width="24"
-                                            Height="24">
+                                <Viewbox Width="15"
+                                         Height="15">
+                                    <Canvas Width="15"
+                                            Height="15">
                                         <Path Data="M16.5,12A2.5,2.5 0 0,0 19,9.5A2.5,2.5 0 0,0 16.5,7A2.5,2.5 0 0,0 14,9.5A2.5,2.5 0 0,0 16.5,12M9,11A3,3 0 0,0 12,8A3,3 0 0,0 9,5A3,3 0 0,0 6,8A3,3 0 0,0 9,11M16.5,14C14.67,14 11,14.92 11,16.75V19H22V16.75C22,14.92 18.33,14 16.5,14M9,13C6.67,13 2,14.17 2,16.5V19H9V16.75C9,15.9 9.33,14.41 11.37,13.28C10.5,13.1 9.66,13 9,13Z"
                                               Fill="White" />
                                     </Canvas>
@@ -98,16 +98,16 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Column="2">
-                            <Button Width="60"
-                                    Height="60"
+                            <Button Width="30"
+                                    Height="30"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Padding="0">
-                                <Viewbox Width="30"
-                                         Height="30">
-                                    <Canvas Width="24"
-                                            Height="24">
+                                <Viewbox Width="15"
+                                         Height="15">
+                                    <Canvas Width="15"
+                                            Height="15">
                                         <Path Data="M19,16A3,3 0 0,0 22,13A3,3 0 0,0 19,10H17.5V9.5A5.5,5.5 0 0,0 12,4C9.5,4 7.37,5.69 6.71,8H6A4,4 0 0,0 2,12A4,4 0 0,0 6,16V11H18V16H19M19.36,8.04C21.95,8.22 24,10.36 24,13A5,5 0 0,1 19,18H18V22H6V18A6,6 0 0,1 0,12C0,8.91 2.34,6.36 5.35,6.04C6.6,3.64 9.11,2 12,2C15.64,2 18.67,4.6 19.36,8.04M8,13V20H16V13H8M9,18H15V19H9V18M15,17H9V16H15V17M9,14H15V15H9V14Z"
                                               Fill="White" />
                                     </Canvas>
@@ -116,7 +116,7 @@
                         </Grid>
                     </Grid>
                     <Grid HorizontalAlignment="Right"
-                          Width="150">
+                          Width="142" Margin="0,0,0.4,-0.2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
@@ -124,15 +124,15 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
-                            <Button Height="60"
+                            <Button Height="30"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Padding="0">
-                                <Viewbox Width="25"
-                                         Height="25">
-                                    <Canvas Width="24"
-                                            Height="24">
+                                <Viewbox Width="12.5"
+                                         Height="12.5">
+                                    <Canvas Width="12.5"
+                                            Height="12.5">
                                         <Path Data="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"
                                               Fill="White" />
                                     </Canvas>
@@ -140,15 +140,15 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Column="1">
-                            <Button Height="60"
+                            <Button Height="30"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Padding="0">
-                                <Viewbox Width="25"
-                                         Height="25">
-                                    <Canvas Width="24"
-                                            Height="24">
+                                <Viewbox Width="12.5"
+                                         Height="12.5">
+                                    <Canvas Width="12.5"
+                                            Height="12.5">
                                         <Path Data="M20,14H4V10H20"
                                               Fill="White" />
                                     </Canvas>
@@ -156,15 +156,15 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Column="2">
-                            <Button Height="60"
+                            <Button Height="30"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Padding="0">
-                                <Viewbox Width="25"
-                                         Height="25">
-                                    <Canvas Width="24"
-                                            Height="24">
+                                <Viewbox Width="12.5"
+                                         Height="12.5">
+                                    <Canvas Width="12.5"
+                                            Height="12.5">
                                         <Path Data="M4,4H20V20H4V4M6,8V18H18V8H6Z"
                                               Fill="White" />
                                     </Canvas>
@@ -172,16 +172,16 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Column="3">
-                            <Button Height="60"
+                            <Button Height="30"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Command="{Binding CloseCommand}"
                                     Padding="0">
-                                <Viewbox Width="25"
-                                         Height="25">
-                                    <Canvas Width="24"
-                                            Height="24">
+                                <Viewbox Width="12.5"
+                                         Height="12.5">
+                                    <Canvas Width="12.5"
+                                            Height="12.5">
                                         <Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
                                               Fill="White" />
                                     </Canvas>
@@ -200,11 +200,15 @@
             </Grid.ColumnDefinitions>
             <Grid Background="#FAFAFA"
                   Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="19*"/>
+                    <ColumnDefinition Width="105*"/>
+                </Grid.ColumnDefinitions>
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden"
                           Cursor="Hand"
                           Name="FriendList"
-                          ItemsSource="{Binding Friends}">
+                          ItemsSource="{Binding Friends}" SelectionChanged="FriendList_SelectionChanged" Height="363" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="124" Margin="0,0,0,0.2" Grid.ColumnSpan="2">
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -213,27 +217,26 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
 
-
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal"
-                                        Height="50"
+                                        Height="25"
                                         >
                                 <Ellipse Cursor="Hand"
-                                         Width="50"
-                                         Height="50">
+                                         Width="25"
+                                         Height="25">
                                     <Ellipse.Fill>
                                         <ImageBrush  ImageSource="{Binding Head}" />
                                     </Ellipse.Fill>
                                 </Ellipse>
                                 <StackPanel Orientation="Vertical"
                                             VerticalAlignment="Center"
-                                            Margin="5 0">
-                                    <TextBlock FontSize="15"
+                                            Margin="2.5 0">
+                                    <TextBlock FontSize="8"
                                                Foreground="Black"
                                                Text="{Binding Nickname}" />
                                     <TextBlock Margin="0 2 0 0"
-                                               FontSize="12"
+                                               FontSize="6"
                                                Text="这家伙很懒,什么也没留下" />
                                 </StackPanel>
                             </StackPanel>
@@ -246,50 +249,31 @@
                                          ToolTip="TIM QQ"
                                          HorizontalAlignment="Right"
                                          VerticalAlignment="Bottom"
-                                         Margin="10 20">
+                                         Margin="0,0,10,20.2" Grid.Column="1" Height="27" Width="27">
                 </materialDesign:PopupBox>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="57*"/>
-                    <RowDefinition Height="443*"/>
-                    <RowDefinition Height="142*"/>
+                    <RowDefinition Height="31*"/>
+                    <RowDefinition Height="268*"/>
+                    <RowDefinition Height="64*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="0,0,0,10">
-                    <TextBlock HorizontalAlignment="Left" 
-                       TextWrapping="Wrap" 
-                       Text="{Binding Nickname}" 
-                       VerticalAlignment="Top" 
-                       FontSize="35"
-                       Height="49" Width="340"/>
-                    <Grid HorizontalAlignment="Right"
-                          Width="150">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </Grid>
-                <RichTextBox x:Name="MessageBox" HorizontalAlignment="Left" Height="92" Margin="10,9.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="832" PreviewKeyDown="MessageBox_KeyDown"/>
-                <Button Content="发送" HorizontalAlignment="Left" Margin="767,118.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" 
-                        Click="Button_Click"
-                        Command="{Binding SendMessageCommand}"
-                        />
-                <RichTextBox x:Name="ShowBox" HorizontalAlignment="Left" Height="491" Margin="10,0.2,0,0"  VerticalAlignment="Top" Width="832" SpellCheck.IsEnabled="True" Grid.Row="1"
-                             IsReadOnly="True"
-                             >
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Margin="0,0,171.4,0"
+                           HorizontalAlignment="Right" Width="255"
+                           Text="{Binding NickName}"
+                           FontSize="20"
+                           />
+                <RichTextBox x:Name="ShowBox" HorizontalAlignment="Left" Margin="0,31,0,0" Width="426" Grid.RowSpan="2" Height="268" VerticalAlignment="Top">
                     <FlowDocument>
                         <Paragraph>
                             <Run Text="{Binding Message}"/>
                         </Paragraph>
                     </FlowDocument>
                 </RichTextBox>
-                
-
+                <TextBox x:Name="MessageBox" HorizontalAlignment="Left" Height="36" Margin="0,4.8,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="426"/>
 
             </Grid>
         </Grid>
+        <Button Content="发送" FontSize="8" HorizontalAlignment="Left" Margin="505,345.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="35" Height="15" RenderTransformOrigin="3.248,-3.7"/>
     </Grid>
 </Window>

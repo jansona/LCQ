@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,9 +52,9 @@ namespace PigeonWindows
             StringBuilder sb = new StringBuilder();
             foreach (User user in users)
             {
-                sb.Append(user.UserName);
-                sb.Append(",");
                 sb.Append(user.UserIp);
+                sb.Append(",");
+                sb.Append(user.UserName);
                 sb.Append(",");
             }
             Type = (DatagramType)Enum.Parse(typeof(DatagramType), "UserList");
@@ -100,16 +102,24 @@ namespace PigeonWindows
             return data;
         }
 
-        public static void Convert(string dataStr,string ip,MainWindow window)
+        public static void Convert(string dataStr,string ip,MainWindow window, UdpClient sendUdpClient)
         {
             Datagram data = GetDatagramFromStr(dataStr);
             switch ((int)data.Type)
             {
                 case 1:
                     window.UpdateClientList(ip,data.Message, true);
+
+                    List<User> users = MainWindowViewModel.Friends.ToList();
+                    users.Add(new User(UDPClient.UdpHandler.GetLocalIP(), window.MyName));
+                    byte[] sendbytes = Encoding.Unicode.GetBytes(
+                         new Datagram(users).ToString());
+                    IPEndPoint remoteIPEndPoint = new IPEndPoint(IPAddress.Parse(ip),
+                        9966);
+                    sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);
                     break;
                 case 2:
-                    window.UpdateClientList(ip,data.Message, true);
+                    window.UpdateClientList(ip,data.Message, false);
                     break;
                 case 3:
                     window.AppendMessageRecord(ip, data.Message);

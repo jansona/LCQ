@@ -8,14 +8,19 @@ using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Mvvm;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.ComponentModel;
+using UDPClient;
 
 namespace PigeonWindows
 {
     class MainWindowViewModel : BindableBase
     {
+
+        public MainWindow window { get; set; }
 
         #region attributes
         public static ObservableCollection<User> Friends { get; set; }
@@ -32,8 +37,21 @@ namespace PigeonWindows
             get { return nickname; }
             set { SetProperty(ref nickname, value); }
         }
-        public Message message = new Message();
-
+        private string message;
+        public string Message
+        {
+            get { return message; }
+            set
+            {
+                SetProperty(ref message, value);
+            }
+        }
+        private User friend;
+        public User Friend
+        {
+            get { return friend; }
+            set { SetProperty(ref friend, value);  }
+        }
         #endregion
 
         #region delegates
@@ -43,8 +61,8 @@ namespace PigeonWindows
         public DelegateCommand CloseCommand { get; set; }
         //添加好友
         public DelegateCommand AddCommand { get; set; }
-        //
-        public DelegateCommand<object> SendMessageCommend { get; set; }
+        //发送消息
+        public DelegateCommand SendMessageCommand { get; set; }
         #endregion
 
         #region public
@@ -57,41 +75,50 @@ namespace PigeonWindows
             return users;
         }
         //当friends更新后，更新friends的ui
+
+
+       
+        //当关闭聊天界面时，导出聊天记录
+        
         #endregion
 
         #region constructor
-        public MainWindowViewModel()
+        public MainWindowViewModel(MainWindow window)
         {
+            this.window = window;
+
             Friends = new ObservableCollection<User>();
             //Friends.Add(new Friend() { Nickname = "Fear of god!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg")) });
             //Friends.Add(new Friend() { Nickname = "Fear of goddness!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon2.jpg")) });
             //Friends.Add(new Friend() { Nickname = "欧阳铁柱", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon3.jpg")) });
             //Friends.Add(new Friend() { Nickname = "皇甫二妞", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon4.jpg")) });
-            Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
-            Friends.Add(new User() { UserName = "幺妹",UserIp= "192.168.153.9", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
-            
-
+            //Friends.Add(new Friend() { Nickname = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
+            //Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")), Messages = new Message("幺妹！" + '\n') });
+            Friends.Add(new User() { UserName = "用于测试的我",
+                UserIp = "192.168.43.131",
+                Messages = new Message("<h1>测试消息</h1>" + '\n'),
+                Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
+                window.handler.receiveUpdClient.Close();
+                window.handler.sendUdpClient.Close();
             });
+
             SelectItemChangedCommand = new DelegateCommand<object>((p) => {
-                
                 ListView lv = p as ListView;
-                User friend = lv.SelectedItem as User;
-                Head = friend.Head;
-                Nickname = friend.UserName;
-                friend.Import();
-                this.message =friend.Messages;
-                
+                Friend = lv.SelectedItem as User;
+                Head = Friend.Head;
+                Nickname = Friend.UserName;
+                Friend.Import();
+                Message = Friend.Messages.Text;
             });
+            
             AddCommand = new DelegateCommand(() => {
                 Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
             });
-            SendMessageCommend =new DelegateCommand<object>((p) => {
-                ListView lv = p as ListView;
-                User friend = lv.SelectedItem as User;
-                
-                //friend.Messages.Text += "abc";
+
+            SendMessageCommand = new DelegateCommand(() => {
+                Message = Friend.Messages.Text;
             });
         }
         #endregion
