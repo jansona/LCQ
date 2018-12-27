@@ -89,10 +89,10 @@ namespace PigeonWindows
             switch ((int)data.Type)
             {
                 case 1:
-                    window.UpdateClientList(ip, user.UserName,user.IconName, true);
+                    window.UpdateClientList(ip, user.UserName, user.IconName, true);
 
                     List<User> users = MainWindowViewModel.Friends.ToList();
-                    users.Add(new User(UDPClient.UdpHandler.GetLocalIP(), window.MyName));
+                    users.Add(new User(UDPClient.UdpHandler.GetLocalIP(), window.MyName,window.MyIcon));
                     byte[] sendbytes = Encoding.Unicode.GetBytes(
                          new Datagram(users).ToString());
                     IPEndPoint remoteIPEndPoint = new IPEndPoint(IPAddress.Parse(ip),
@@ -100,7 +100,7 @@ namespace PigeonWindows
                     sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);
                     break;
                 case 2:
-                    window.UpdateClientList(ip, user.UserName,user.IconName, false);
+                    window.UpdateClientList(ip, user.UserName, user.IconName, false);
                     break;
                 case 3:
                     window.AppendMessageRecord(ip, data.Message);

@@ -27,6 +27,7 @@ namespace PigeonWindows
 
         public String MyName { set; get; }
         public String MyIcon { get; set; }
+        private bool isInGroupChat = false;
 
         public MainWindow()
         {
@@ -67,14 +68,15 @@ namespace PigeonWindows
             textRange1.Text = "";
             friend.Export();
             MessageBox.Document.Blocks.Clear();
+            handler.Broadcast(DatagramType.OnLine);
         }
-        public void UpdateClientList(string remoteIP, string name,string icon, bool isOnline)
+        public void UpdateClientList(string remoteIP, string name, string icon, bool isOnline)
         {
             if (isOnline)
             {
                 //MainWindowViewModel.Friends.Add(new User(remoteIP, name));
 
-                Action updateUI = new Action(() => { MainWindowViewModel.Friends.Add(new User(remoteIP, name,icon)); });
+                Action updateUI = new Action(() => { MainWindowViewModel.Friends.Add(new User(remoteIP, name, icon)); });
                 Dispatcher.BeginInvoke(updateUI);
             }
             else
@@ -119,10 +121,35 @@ namespace PigeonWindows
 
         private void MessageBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 Button_Click(this, new RoutedEventArgs());
                 MessageBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (!isInGroupChat)
+            {
+                Action updateUI = new Action(() =>
+                {
+                    MainWindowViewModel.Friends.Add(new User("", "多人聊天", "groupchat"));
+                });
+                Dispatcher.BeginInvoke(updateUI);
+                isInGroupChat = true;
+            }
+            else
+            {
+                var query = from user in MainWindowViewModel.Friends
+                            where user.UserName == "多人聊天"
+                            select user;
+                Action updateUI = new Action(() => 
+                {
+                    MainWindowViewModel.Friends.Remove(query.ToList()[0]);
+                });
+                Dispatcher.BeginInvoke(updateUI);
+                isInGroupChat = false;
             }
         }
     }

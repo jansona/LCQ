@@ -76,7 +76,7 @@ namespace UDPClient
                     string message = Encoding.Unicode.GetString(receiveBytes);
 
                     string remoteIPAddress = remoteIpEndPoint.Address.ToString();
-                    //if(remoteIPAddress != GetLocalIP())
+                    if(remoteIPAddress != GetLocalIP())
                         Datagram.Convert(message, remoteIPAddress, mainWindow, sendUdpClient);
 
                     //UpdateUIDelegate updateUIDelegate = new UpdateUIDelegate(update);
@@ -85,8 +85,9 @@ namespace UDPClient
                     //this.lstView.Dispatcher.Invoke(updateUIDelegate, Item, NewItem);
 
                 }
-                catch
+                catch(Exception e)
                 {
+                    Console.WriteLine(e.Message);
                     break;
                 }
             }

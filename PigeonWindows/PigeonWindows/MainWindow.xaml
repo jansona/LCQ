@@ -240,14 +240,17 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                
                 <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
                                          PlacementMode="TopAndAlignCentres"
                                          ToolTipService.Placement="Left"
                                          ToolTip="TIM QQ"
                                          HorizontalAlignment="Right"
                                          VerticalAlignment="Bottom"
-                                         Margin="10 20">
+                                         Margin="10 20" Content="群聊">
+                    <Button Click="Button_Click_1" Content="群聊"></Button>
                 </materialDesign:PopupBox>
+                
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
