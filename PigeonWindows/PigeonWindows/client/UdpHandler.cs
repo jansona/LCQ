@@ -76,19 +76,12 @@ namespace UDPClient
 
                     //string message = Encoding.Unicode.GetString(receiveBytes);
 
-<<<<<<< HEAD
-                    string remoteIPAddress = remoteIpEndPoint.Address.ToString();
-                    if(remoteIPAddress != GetLocalIP())
-                        Datagram.Convert(message, remoteIPAddress, mainWindow, sendUdpClient);
-
-                    //UpdateUIDelegate updateUIDelegate = new UpdateUIDelegate(update);
-=======
                     //string remoteIPAddress = remoteIpEndPoint.Address.ToString();
                     //if(remoteIPAddress != GetLocalIP())
                     //    Datagram.Convert(message, remoteIPAddress, mainWindow, sendUdpClient);
+
                     byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIpEndPoint);
                     UpdateUIDelegate updateUIDelegate = new UpdateUIDelegate(update);
->>>>>>> dc3387c7b0da75f7dbbf37b1eac8bf12bfe8f690
 
                     //通过调用委托
                     this.mainWindow.Dispatcher.BeginInvoke(updateUIDelegate, receiveBytes, remoteIpEndPoint);
