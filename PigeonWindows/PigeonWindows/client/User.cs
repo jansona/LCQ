@@ -18,6 +18,7 @@ namespace PigeonWindows
         public string UserIp { get; set; }
         public string UserName { get; set; }
         public BitmapImage Head { get; set; }
+        public string IconName { get; set; }
         //键是对方的ip地址，值是text文本内容
         public Message Messages { get; set; }
         public User(string Ip, string Name)
@@ -33,6 +34,14 @@ namespace PigeonWindows
             //Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg"));
         }
 
+        public User(string Ip, string Name,string Icon)
+        {
+            UserIp = Ip;
+            UserName = Name;
+            Messages = new Message();
+            Head = new BitmapImage(new Uri("pack://application:,,,/Images/"+Icon+".jpg"));
+            IconName = Icon;
+        }
 
 
         public static void XmlSerialize(XmlSerializer ser, string fileName, object obj)

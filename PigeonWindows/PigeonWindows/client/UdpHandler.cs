@@ -104,7 +104,7 @@ namespace UDPClient
             
             //string announcement = "ONLINE";
             byte[] sendbytes = Encoding.Unicode.GetBytes(
-                new Datagram(type.ToString(), mainWindow.MyName).ToString());
+                new Datagram(type.ToString(), mainWindow.MyName,mainWindow.MyIcon).ToString());
             IPEndPoint remoteIPEndPoint = new IPEndPoint(IPAddress.Broadcast,
                 int.Parse(ListenPort));
             sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);

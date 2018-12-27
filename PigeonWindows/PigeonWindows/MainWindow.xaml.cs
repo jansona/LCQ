@@ -26,10 +26,12 @@ namespace PigeonWindows
         public UdpHandler handler;
 
         public String MyName { set; get; }
+        public String MyIcon { get; set; }
 
         public MainWindow()
         {
             MyName = "ha";
+            MyIcon = "icon1";
             InitializeComponent();
             handler = new UdpHandler(this);
             this.DataContext = new MainWindowViewModel(this);
@@ -37,6 +39,8 @@ namespace PigeonWindows
         public MainWindow(String myname)
         {
             MyName = myname;
+            Random ran = new Random();
+            MyIcon = "icon" + ran.Next(1, 7);
             InitializeComponent();
             handler = new UdpHandler(this);
             this.DataContext = new MainWindowViewModel(this);
@@ -64,13 +68,13 @@ namespace PigeonWindows
             friend.Export();
             MessageBox.Document.Blocks.Clear();
         }
-        public void UpdateClientList(string remoteIP, string name, bool isOnline)
+        public void UpdateClientList(string remoteIP, string name,string icon, bool isOnline)
         {
             if (isOnline)
             {
                 //MainWindowViewModel.Friends.Add(new User(remoteIP, name));
 
-                Action updateUI = new Action(() => { MainWindowViewModel.Friends.Add(new User(remoteIP, name)); });
+                Action updateUI = new Action(() => { MainWindowViewModel.Friends.Add(new User(remoteIP, name,icon)); });
                 Dispatcher.BeginInvoke(updateUI);
             }
             else

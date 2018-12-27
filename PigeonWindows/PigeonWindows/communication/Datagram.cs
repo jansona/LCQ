@@ -36,7 +36,7 @@ namespace PigeonWindows
             return sb.ToString();
         }
 
-        public Datagram(string type,string message)
+        public Datagram(string type, string message)
         {
             Type = Type = (DatagramType)Enum.Parse(typeof(DatagramType), type);
             Message = message;
@@ -56,11 +56,18 @@ namespace PigeonWindows
                 sb.Append(",");
                 sb.Append(user.UserName);
                 sb.Append(",");
-                //sb.Append(user.Head.UriSource);
-                
+                sb.Append(user.IconName);
+                sb.Append(",");
             }
             Type = (DatagramType)Enum.Parse(typeof(DatagramType), "UserList");
             Message = sb.ToString();
+        }
+
+        public Datagram(string type, string name, string icon)
+        {
+
+            Message = name + "," + icon;
+            Type = Type = (DatagramType)Enum.Parse(typeof(DatagramType), type);
         }
 
         public static Datagram GetDatagramFromStr(string str)
@@ -75,13 +82,14 @@ namespace PigeonWindows
             return data;
         }
 
-        public static void Convert(string dataStr,string ip,MainWindow window, UdpClient sendUdpClient)
+        public static void Convert(string dataStr, string ip, MainWindow window, UdpClient sendUdpClient)
         {
             Datagram data = GetDatagramFromStr(dataStr);
+            User user = GetUser(data);
             switch ((int)data.Type)
             {
                 case 1:
-                    window.UpdateClientList(ip,data.Message, true);
+                    window.UpdateClientList(ip, user.UserName,user.IconName, true);
 
                     List<User> users = MainWindowViewModel.Friends.ToList();
                     users.Add(new User(UDPClient.UdpHandler.GetLocalIP(), window.MyName));
@@ -92,7 +100,7 @@ namespace PigeonWindows
                     sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);
                     break;
                 case 2:
-                    window.UpdateClientList(ip,data.Message, false);
+                    window.UpdateClientList(ip, user.UserName,user.IconName, false);
                     break;
                 case 3:
                     window.AppendMessageRecord(ip, data.Message);
@@ -106,12 +114,21 @@ namespace PigeonWindows
         public static List<User> GetUsers(Datagram data)
         {
             List<User> users = new List<User>();
-            string []strList = data.Message.Split(',');
-            for(int i = 0; i < strList.Length / 2; i++)
+            string[] strList = data.Message.Split(',');
+            for (int i = 0; i < strList.Length / 3; i++)
             {
-                users.Add(new User(strList[2 * i], strList[2 * i + 1]));
+                users.Add(new User(strList[3 * i], strList[3 * i + 1], strList[3 * i + 2]));
             }
             return users;
+        }
+
+        public static User GetUser(Datagram data)
+        {
+            User user = new User();
+            string[] strList = data.Message.Split(',');
+            user.UserName = strList[0];
+            user.IconName = strList[1];
+            return user;
         }
     }
 
