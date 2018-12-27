@@ -128,7 +128,14 @@ namespace UDPClient
             //return userList;
         }
 
-
+        public void Broadcast(DatagramType type,string message)
+        {
+            byte[] sendbytes = Encoding.Unicode.GetBytes(
+                new Datagram(type.ToString(), message).ToString());
+            IPEndPoint remoteIPEndPoint = new IPEndPoint(IPAddress.Broadcast,
+                int.Parse(ListenPort));
+            sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);
+        }
 
         public static string GetLocalIP()
         {

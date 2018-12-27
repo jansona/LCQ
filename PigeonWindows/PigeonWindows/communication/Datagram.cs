@@ -113,6 +113,9 @@ namespace PigeonWindows
                 case 4:
                     window.InitClientList(GetUsers(data));
                     break;
+                case 5:
+                     window.AppendMessageRecord("0.0.0.0", data.Message);
+                    break;
             }
         }
 
@@ -142,6 +145,7 @@ namespace PigeonWindows
         OnLine = 1,
         DownLine,
         Chat,
-        UserList
+        UserList,
+        GroupChat,
     }
 }
