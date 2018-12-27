@@ -151,6 +151,16 @@ namespace PigeonWindows
                 Dispatcher.BeginInvoke(updateUI);
                 isInGroupChat = false;
             }
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+            handler.Broadcast(DatagramType.DownLine);
+            handler.receiveUpdClient.Close();
+            handler.sendUdpClient.Close();
+            this.Close();
         }
     }
 }

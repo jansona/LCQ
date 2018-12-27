@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace PigeonWindows
 {
+    /// <summary>
+    /// 数据包类，在该类中会进行数据包的生成与解析并执行相应操作
+    /// </summary>
     public class Datagram
     {
+
         public DatagramType Type
         {
             get;
@@ -70,7 +74,7 @@ namespace PigeonWindows
             Type = Type = (DatagramType)Enum.Parse(typeof(DatagramType), type);
         }
 
-        public static Datagram GetDatagramFromStr(string str)
+        private static Datagram GetDatagramFromStr(string str)
         {
             string type = str.Substring(0, 1);
             string message = str.Substring(1);
@@ -86,6 +90,7 @@ namespace PigeonWindows
         {
             Datagram data = GetDatagramFromStr(dataStr);
             User user = GetUser(data);
+
             switch ((int)data.Type)
             {
                 case 1:
@@ -97,7 +102,7 @@ namespace PigeonWindows
                          new Datagram(users).ToString());
                     IPEndPoint remoteIPEndPoint = new IPEndPoint(IPAddress.Parse(ip),
                         9966);
-                    sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);
+                    window.handler.sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);
                     break;
                 case 2:
                     window.UpdateClientList(ip, user.UserName, user.IconName, false);

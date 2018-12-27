@@ -177,7 +177,7 @@
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Command="{Binding CloseCommand}"
-                                    Padding="0">
+                                    Padding="0" Click="Button_Click_1">
                                 <Viewbox Width="25"
                                          Height="25">
                                     <Canvas Width="24"
