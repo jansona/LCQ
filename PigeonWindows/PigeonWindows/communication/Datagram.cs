@@ -56,39 +56,12 @@ namespace PigeonWindows
                 sb.Append(",");
                 sb.Append(user.UserName);
                 sb.Append(",");
+                //sb.Append(user.Head.UriSource);
+                
             }
             Type = (DatagramType)Enum.Parse(typeof(DatagramType), "UserList");
             Message = sb.ToString();
         }
-
-        //public static Datagram CreatDatagram(string str, DatagramType type)
-        //{
-        //    Datagram data = new Datagram();
-            //前面不是CHAT主要是建立连接 取消连接等信号传送
-            //if (!isChat)
-            //{
-            //    IDictionary<string, string> idict = new Dictionary<string, string>();
-
-            //    string[] strlist = str.Split(',');
-            //    for (int i = 0; i < strlist.Length; i++)
-            //    {
-            //        //数据报字符串的各个键值对放进字典类
-            //        string[] info = strlist[i].Split('=');
-            //        idict.Add(info[0], info[1]);
-            //    }
-
-            //    data.Type = (DatagramType)Enum.Parse(typeof(DatagramType), idict["Type"]);
-
-            //    data.Message = idict["Message"];
-            //}
-            //else
-            //{
-            //    data.Type = (DatagramType)Enum.Parse(typeof(DatagramType), "Chat");
-            //    data.Message = str;
-            //}
-
-        //    return data;
-        //}
 
         public static Datagram GetDatagramFromStr(string str)
         {

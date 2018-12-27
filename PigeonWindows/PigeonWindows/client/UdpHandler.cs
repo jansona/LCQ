@@ -77,7 +77,7 @@ namespace UDPClient
 
                     string remoteIPAddress = remoteIpEndPoint.Address.ToString();
                     //if(remoteIPAddress != GetLocalIP())
-                    Datagram.Convert(message, remoteIPAddress, mainWindow, sendUdpClient);
+                        Datagram.Convert(message, remoteIPAddress, mainWindow, sendUdpClient);
 
                     //UpdateUIDelegate updateUIDelegate = new UpdateUIDelegate(update);
 
