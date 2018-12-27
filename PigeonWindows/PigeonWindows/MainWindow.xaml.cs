@@ -125,5 +125,13 @@ namespace PigeonWindows
                 MessageBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            handler.Broadcast(DatagramType.DownLine);
+            handler.receiveUpdClient.Close();
+            handler.sendUdpClient.Close();
+            this.Close();
+        }
     }
 }

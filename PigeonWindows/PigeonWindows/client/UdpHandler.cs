@@ -62,7 +62,7 @@ namespace UDPClient
             //MainWindow.Dispatcher.BeginInvoke(updateUI, MainWindow);
         }
 
-        public delegate void UpdateUIDelegate(string message, string ip, MainWindow window);
+        public delegate void UpdateUIDelegate(byte[] receiveBytes, IPEndPoint remoteIpEndPoint);
         private void ReceiveMessage()
         {
             IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
@@ -70,20 +70,21 @@ namespace UDPClient
             {
                 try
                 {
+
                     // 关闭receiveUdpClient时此时会产生异常
-                    byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIpEndPoint);
+                    //byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIpEndPoint);
 
-                    string message = Encoding.Unicode.GetString(receiveBytes);
+                    //string message = Encoding.Unicode.GetString(receiveBytes);
 
-                    string remoteIPAddress = remoteIpEndPoint.Address.ToString();
+                    //string remoteIPAddress = remoteIpEndPoint.Address.ToString();
                     //if(remoteIPAddress != GetLocalIP())
-                        Datagram.Convert(message, remoteIPAddress, mainWindow, sendUdpClient);
-
-                    //UpdateUIDelegate updateUIDelegate = new UpdateUIDelegate(update);
+                    //    Datagram.Convert(message, remoteIPAddress, mainWindow, sendUdpClient);
+                    byte[] receiveBytes = receiveUpdClient.Receive(ref remoteIpEndPoint);
+                    UpdateUIDelegate updateUIDelegate = new UpdateUIDelegate(update);
 
                     //通过调用委托
-                    //this.lstView.Dispatcher.Invoke(updateUIDelegate, Item, NewItem);
-
+                    this.mainWindow.Dispatcher.BeginInvoke(updateUIDelegate, receiveBytes, remoteIpEndPoint);
+                    
                 }
                 catch
                 {
@@ -92,9 +93,16 @@ namespace UDPClient
             }
         }
 
-        private void update(string message,string ip,MainWindow window)
+        // 这里要调用一个委托，并利用上面的invoke实现线程的异步执行，否则会报错
+        // 2018年12月28日02:33:28  调这个bug调了一个半小时  fxxxxxxxxxxxxxk
+        private void update( byte[] receiveBytes, IPEndPoint remoteIpEndPoint)
         {
-            
+
+            string message1 = Encoding.Unicode.GetString(receiveBytes);
+
+            string remoteIPAddress = remoteIpEndPoint.Address.ToString();
+            if (remoteIPAddress != GetLocalIP())
+                Datagram.Convert(message1, remoteIPAddress, mainWindow, sendUdpClient);
         }
 
 
