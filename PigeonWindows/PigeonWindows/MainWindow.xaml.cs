@@ -85,7 +85,7 @@ namespace PigeonWindows
                 handler.SendMessage(friend.UserIp, "9966", data.ToString());
             else
                 handler.Broadcast(DatagramType.GroupChat, textRange1.Text);
-            
+
             MessageBox.Document.Blocks.Clear();
         }
         public void UpdateClientList(string remoteIP, string name, string icon, bool isOnline)
@@ -128,6 +128,21 @@ namespace PigeonWindows
             //});
             //Dispatcher.BeginInvoke(updateUI);
         }
+        public void AppendMessageRecord(string groupchatip, string userip, string message)
+        {
+            var query = from user in MainWindowViewModel.Friends
+                        where user.UserIp == groupchatip
+                        select user;
+            var query2 = from user in MainWindowViewModel.Friends
+                        where user.UserIp == userip
+                         select user;
+            User groupChat = query.First();
+            User remoteUser = query2.First();
+            groupChat.Messages.Text += (remoteUser.UserName + " : " + message + "\n");
+            groupChat.Export();
+            MainWindowViewModel viewModel = DataContext as MainWindowViewModel;
+            viewModel.Message = groupChat.Messages.Text;
+        }
         public void InitClientList(List<User> list)
         {
             Action updateUI = new Action(() =>
@@ -137,7 +152,7 @@ namespace PigeonWindows
                     var query = from user2 in MainWindowViewModel.Friends
                                 where user2.UserIp == user.UserIp
                                 select user2;
-                    if(query.ToList().Count==0)
+                    if (query.ToList().Count == 0)
                         MainWindowViewModel.Friends.Add(user);
                 }
             });
@@ -169,7 +184,7 @@ namespace PigeonWindows
                 var query = from user in MainWindowViewModel.Friends
                             where user.UserName == "多人聊天"
                             select user;
-                Action updateUI = new Action(() => 
+                Action updateUI = new Action(() =>
                 {
                     MainWindowViewModel.Friends.Remove(query.ToList()[0]);
                 });

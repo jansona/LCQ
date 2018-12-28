@@ -115,7 +115,7 @@ namespace PigeonWindows
                     window.InitClientList(GetUsers(data));
                     break;
                 case 5:
-                     window.AppendMessageRecord("0.0.0.0", data.Message);
+                     window.AppendMessageRecord("0.0.0.0",ip, data.Message);
                     break;
             }
         }
