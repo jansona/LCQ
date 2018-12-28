@@ -88,6 +88,8 @@ namespace PigeonWindows
             else
                 handler.Broadcast(DatagramType.GroupChat, textRange1.Text);
 
+            // 重新给绑定属性赋值
+            ((MainWindowViewModel)DataContext).Message = friend.Messages.Text;
             MessageBox.Document.Blocks.Clear();
         }
         public void UpdateClientList(string remoteIP, string name, string icon, bool isOnline)
@@ -168,7 +170,7 @@ namespace PigeonWindows
             if (e.Key == Key.Enter)
             {
                 Button_Click(this, new RoutedEventArgs());
-                MessageBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                //MessageBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
         }
 
@@ -205,6 +207,11 @@ namespace PigeonWindows
             handler.receiveUpdClient.Close();
             handler.sendUdpClient.Close();
             this.Close();
+        }
+
+        private void ShowBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ShowBox.ScrollToEnd();
         }
     }
 }
