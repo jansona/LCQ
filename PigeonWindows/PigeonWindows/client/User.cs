@@ -58,18 +58,30 @@ namespace PigeonWindows
         }
         public void Export()
         {
-            Messages.Text = Message.Encrypt(Messages.Text);
+           
+                // Determine whether the directory exists.
+                if (!Directory.Exists("messages"))
+                {
+                    // Create the directory it does not exist.
+                    Directory.CreateDirectory("messages");
+                }
+                Messages.Text = Message.Encrypt(Messages.Text);
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Message));
-            string xmlFileName = UserName + "message" + ".xml";
+            string xmlFileName = "messages/"+UserName + "message" + ".xml";
             XmlSerialize(xmlSerializer, xmlFileName, Messages);
             Console.WriteLine("已保存所有数据");
             Messages.Text = Message.Decrypt(Messages.Text);
         }
         public void Import()
         {
-            if (!File.Exists(UserName + "message" + ".xml")) { Console.WriteLine("导入失败，本地无数据"); return; }
+            if (!Directory.Exists("messages"))
+            {
+                // Create the directory it does not exist.
+                Directory.CreateDirectory("messages");
+            }
+            if (!File.Exists("messages/"+UserName + "message" + ".xml")) { Console.WriteLine("导入失败，本地无数据"); return; }
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Message));
-            FileStream fs = new FileStream(UserName + "message" + ".xml", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream("messages/" + UserName + "message" + ".xml", FileMode.Open, FileAccess.Read);
             Message temp;
             try
             {
