@@ -88,18 +88,12 @@ namespace PigeonWindows
             this.window = window;
 
             Friends = new ObservableCollection<User>();
-            //Friends.Add(new Friend() { Nickname = "Fear of god!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon1.jpg")) });
-            //Friends.Add(new Friend() { Nickname = "Fear of goddness!", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon2.jpg")) });
-            //Friends.Add(new Friend() { Nickname = "欧阳铁柱", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon3.jpg")) });
-            //Friends.Add(new Friend() { Nickname = "皇甫二妞", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon4.jpg")) });
-            //Friends.Add(new Friend() { Nickname = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
-            //Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")), Messages = new Message("幺妹！" + '\n') });
-            Friends.Add(new User() { UserName = "用于测试的我",
-                UserIp = "192.168.43.131",
-                Messages = new Message("<h1>测试消息</h1>" + '\n'),
-                Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")),
-                IconName = "icon6"
-            });
+            //Friends.Add(new User() { UserName = "用于测试的我",
+            //    UserIp = "192.168.43.131",
+            //    Messages = new Message("<h1>测试消息</h1>" + '\n'),
+            //    Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")),
+            //    IconName = "icon6"
+            //});
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
                 window.handler.receiveUpdClient.Close();
@@ -116,10 +110,6 @@ namespace PigeonWindows
                 Nickname = Friend.UserName;
                 Friend.Import();
                 Message = Friend.Messages.Text;
-            });
-            
-            AddCommand = new DelegateCommand(() => {
-                Friends.Add(new User() { UserName = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
             });
 
             SendMessageCommand = new DelegateCommand(() => {

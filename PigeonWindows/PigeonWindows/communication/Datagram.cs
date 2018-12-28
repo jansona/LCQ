@@ -13,7 +13,6 @@ namespace PigeonWindows
     /// </summary>
     public class Datagram
     {
-
         public DatagramType Type
         {
             get;

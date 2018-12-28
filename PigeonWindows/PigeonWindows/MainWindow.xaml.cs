@@ -21,28 +21,16 @@ namespace PigeonWindows
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        //public String Message { set; get; }
         public UdpHandler handler;
 
         public String MyName { set; get; }
         public String MyIcon { get; set; }
-        //private BitmapImage myHead;
-        //public BitmapImage MyHead
-        //{
-        //    get { return myHead; }
-        //    set
-        //    {
-        //        myHead = new BitmapImage(new Uri("pack://application:,,,/Images/" + MyIcon + ".jpg"));
-        //    }
-        //}
         private bool isInGroupChat = false;
 
         public MainWindow()
         {
             MyName = "ha";
             MyIcon = "icon1";
-            //MyHead.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/" + MyIcon + ".jpg"));
             InitializeComponent();
             handler = new UdpHandler(this);
             this.DataContext = new MainWindowViewModel(this);
@@ -52,7 +40,6 @@ namespace PigeonWindows
             MyName = myname;
             Random ran = new Random();
             MyIcon = "icon" + ran.Next(1, 7);
-            //MyHead.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/" + MyIcon + ".jpg"));
             InitializeComponent();
             handler = new UdpHandler(this);
             this.DataContext = new MainWindowViewModel(this);
@@ -68,10 +55,6 @@ namespace PigeonWindows
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //handler.SendMessage("192.168.99.1", "19966", "test message");
-            //textBox.Text = "send";
-            //handler.TestSend();
-            //ShowBox.AppendText(MessageBox.Text + '\n');
             User friend = FriendList.SelectedItem as User;
 
             TextRange textRange1 = new TextRange(
@@ -96,8 +79,6 @@ namespace PigeonWindows
         {
             if (isOnline)
             {
-                //MainWindowViewModel.Friends.Add(new User(remoteIP, name));
-
                 Action updateUI = new Action(() => { MainWindowViewModel.Friends.Add(new User(remoteIP, name, icon)); });
                 Dispatcher.BeginInvoke(updateUI);
             }
@@ -113,9 +94,9 @@ namespace PigeonWindows
                     {
                         MainWindowViewModel.Friends.Remove(query.ToList()[0]);
                     }
-                    catch
+                    catch(Exception e)
                     {
-
+                        Console.WriteLine(e);
                     }
                 });
                 Dispatcher.BeginInvoke(updateUI);
@@ -135,13 +116,6 @@ namespace PigeonWindows
                 MainWindowViewModel viewModel = DataContext as MainWindowViewModel;
                 viewModel.Message = targetUser.Messages.Text;
             }
-            //{
-            //    MessageBox.BeginChange();
-            //    targetUser.Messages.Text += (targetUser.UserName + " : " + message + "\n");
-            //    MessageBox.EndChange();
-            //    MessageBox.UpdateLayout();
-            //});
-            //Dispatcher.BeginInvoke(updateUI);
         }
         public void AppendMessageRecord(string groupchatip, string userip, string message)
         {
@@ -185,7 +159,6 @@ namespace PigeonWindows
             if (e.Key == Key.Enter)
             {
                 Button_Click(this, new RoutedEventArgs());
-                //MessageBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
         }
 
