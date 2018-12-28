@@ -109,7 +109,14 @@ namespace PigeonWindows
 
                 Action updateUI = new Action(() =>
                 {
-                    MainWindowViewModel.Friends.Remove(query.ToList()[0]);
+                    try
+                    {
+                        MainWindowViewModel.Friends.Remove(query.ToList()[0]);
+                    }
+                    catch
+                    {
+
+                    }
                 });
                 Dispatcher.BeginInvoke(updateUI);
             }
