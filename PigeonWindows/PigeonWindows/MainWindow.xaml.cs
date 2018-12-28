@@ -78,7 +78,7 @@ namespace PigeonWindows
                         MessageBox.Document.ContentStart,
                         MessageBox.Document.ContentEnd
                         );
-            friend.Messages.Text += textRange1.Text;
+            friend.Messages.Text += "我: "+textRange1.Text;
             friend.Export();
             var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
             if (friend.UserName != "多人聊天")
