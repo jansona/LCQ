@@ -27,12 +27,22 @@ namespace PigeonWindows
 
         public String MyName { set; get; }
         public String MyIcon { get; set; }
+        //private BitmapImage myHead;
+        //public BitmapImage MyHead
+        //{
+        //    get { return myHead; }
+        //    set
+        //    {
+        //        myHead = new BitmapImage(new Uri("pack://application:,,,/Images/" + MyIcon + ".jpg"));
+        //    }
+        //}
         private bool isInGroupChat = false;
 
         public MainWindow()
         {
             MyName = "ha";
             MyIcon = "icon1";
+            //MyHead.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/" + MyIcon + ".jpg"));
             InitializeComponent();
             handler = new UdpHandler(this);
             this.DataContext = new MainWindowViewModel(this);
@@ -42,6 +52,7 @@ namespace PigeonWindows
             MyName = myname;
             Random ran = new Random();
             MyIcon = "icon" + ran.Next(1, 7);
+            //MyHead.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/" + MyIcon + ".jpg"));
             InitializeComponent();
             handler = new UdpHandler(this);
             this.DataContext = new MainWindowViewModel(this);
