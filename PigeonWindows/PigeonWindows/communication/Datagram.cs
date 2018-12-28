@@ -89,11 +89,12 @@ namespace PigeonWindows
         public static void Convert(string dataStr, string ip, MainWindow window, UdpClient sendUdpClient)
         {
             Datagram data = GetDatagramFromStr(dataStr);
-            User user = GetUser(data);
+            
 
             switch ((int)data.Type)
             {
                 case 1:
+                    User user = GetUser(data);
                     window.UpdateClientList(ip, user.UserName, user.IconName, true);
 
                     List<User> users = MainWindowViewModel.Friends.ToList();
@@ -105,6 +106,7 @@ namespace PigeonWindows
                     window.handler.sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIPEndPoint);
                     break;
                 case 2:
+                    user = GetUser(data);
                     window.UpdateClientList(ip, user.UserName, user.IconName, false);
                     break;
                 case 3:

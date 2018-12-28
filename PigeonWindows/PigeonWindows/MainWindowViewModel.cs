@@ -95,7 +95,7 @@ namespace PigeonWindows
             //Friends.Add(new Friend() { Nickname = "王二狗", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon5.jpg")) });
             //Friends.Add(new User() { UserName = "幺妹", Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")), Messages = new Message("幺妹！" + '\n') });
             Friends.Add(new User() { UserName = "用于测试的我",
-                UserIp = "192.168.43.131",
+                UserIp = "192.168.43.111",
                 Messages = new Message("<h1>测试消息</h1>" + '\n'),
                 Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")),
                 IconName = "icon6"
