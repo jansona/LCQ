@@ -53,7 +53,7 @@
                              Width="50"
                              Height="50">
                         <Ellipse.Fill>
-                            <ImageBrush  ImageSource="Images/account.png" />
+                            <ImageBrush x:Name="MyHead" ImageSource="Images/account.png"/>
                         </Ellipse.Fill>
                     </Ellipse>
                     <Grid HorizontalAlignment="Center"

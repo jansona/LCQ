@@ -27,12 +27,22 @@ namespace PigeonWindows
 
         public String MyName { set; get; }
         public String MyIcon { get; set; }
+        //private BitmapImage myHead;
+        //public BitmapImage MyHead
+        //{
+        //    get { return myHead; }
+        //    set
+        //    {
+        //        myHead = new BitmapImage(new Uri("pack://application:,,,/Images/" + MyIcon + ".jpg"));
+        //    }
+        //}
         private bool isInGroupChat = false;
 
         public MainWindow()
         {
             MyName = "ha";
             MyIcon = "icon1";
+            //MyHead.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/" + MyIcon + ".jpg"));
             InitializeComponent();
             handler = new UdpHandler(this);
             this.DataContext = new MainWindowViewModel(this);
@@ -42,6 +52,7 @@ namespace PigeonWindows
             MyName = myname;
             Random ran = new Random();
             MyIcon = "icon" + ran.Next(1, 7);
+            //MyHead.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/" + MyIcon + ".jpg"));
             InitializeComponent();
             handler = new UdpHandler(this);
             this.DataContext = new MainWindowViewModel(this);
@@ -67,10 +78,9 @@ namespace PigeonWindows
                         MessageBox.Document.ContentStart,
                         MessageBox.Document.ContentEnd
                         );
-
-            var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
             friend.Messages.Text += textRange1.Text;
             friend.Export();
+            var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
             if (friend.UserName != "多人聊天")
                 handler.SendMessage(friend.UserIp, "9966", data.ToString());
             else
@@ -108,7 +118,8 @@ namespace PigeonWindows
             User targetUser = query.First();
             targetUser.Messages.Text += (targetUser.UserName + " : " + message + "\n");
             targetUser.Export();
-            //Action updateUI = new Action(() =>
+            MainWindowViewModel viewModel = DataContext as MainWindowViewModel;
+            viewModel.Message = targetUser.Messages.Text;
             //{
             //    MessageBox.BeginChange();
             //    targetUser.Messages.Text += (targetUser.UserName + " : " + message + "\n");
