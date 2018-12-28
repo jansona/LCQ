@@ -46,5 +46,19 @@ namespace PigeonWindows
                 Button_Click(this, new RoutedEventArgs());
             }
         }
+
+        private void NavBar_MouseLeftButtonDown0(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+        private void Button_Minimize0(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+        private void Close_Button_Click(object sender, RoutedEventArgs e)
+        {            
+            this.Close();
+        }
+
     }
 }

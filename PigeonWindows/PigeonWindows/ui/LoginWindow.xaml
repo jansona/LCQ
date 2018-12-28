@@ -3,28 +3,101 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PigeonWindows"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="400" Width="500">
+        Title="LoginWindow" Height="400" Width="500"
+        WindowStyle="None"
+        ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
+            <ColumnDefinition Width="499*" />
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto"/>
-            <RowDefinition />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="370*"/>
         </Grid.RowDefinitions>
-        <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Images/Login.jpg"/>
-        </Grid.Background>
 
-        <!-- Login button -->
-        <Button Grid.Row="2"  Click="Button_Click" Grid.ColumnSpan="2" Margin="160,109.2,144.6,10.6">登录</Button>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="56,88.4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Grid.Column="1" Grid.Row="2" PreviewKeyUp="Key_Press"/>
-        <Label x:Name="label" Content="用户名：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="78,88.4,0,0" Grid.Row="2"/>
+        <Grid Grid.Row="0">
+            <materialDesign:ColorZone Mode="PrimaryMid"
+                                      Name="NavBar"
+                                      Height="35"
+                                      MouseLeftButtonDown="NavBar_MouseLeftButtonDown0"
+                                      materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="0,0,0,0">
+                <Grid>
+                    <Grid HorizontalAlignment="Right"
+                          Width="120">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Button Height="31"
+                                    Background="{x:Null}"
+                                    BorderBrush="{x:Null}"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                    Padding="0">
+                                <Viewbox Width="25"
+                                         Height="25">
+                                    <Canvas Width="24"
+                                            Height="24">
+                                        <Path Data="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"
+                                              Fill="White" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Button Height="31"
+                                    Background="{x:Null}"
+                                    BorderBrush="{x:Null}"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                    Padding="0"
+                                    Click="Button_Minimize0"
+                                    >
+                                <Viewbox Width="25"
+                                         Height="25">
+                                    <Canvas Width="24"
+                                            Height="24">
+                                        <Path Data="M20,14H4V10H20"
+                                              Fill="White" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <Button Height="31"
+                                    Background="{x:Null}"
+                                    BorderBrush="{x:Null}"
+                                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                    Command="{Binding CloseCommand}"
+                                    Padding="0" Click="Close_Button_Click">
+                                <Viewbox Width="25"
+                                         Height="25">
+                                    <Canvas Width="24"
+                                            Height="24">
+                                        <Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                                              Fill="White" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </materialDesign:ColorZone>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <ImageBrush ImageSource="pack://application:,,,/Images/Login.jpg"/>
+            </Grid.Background>
+            <!-- Login button -->
+            <Button  Click="Button_Click" Margin="159,301,146,31.8" RenderTransformOrigin="0.451,2.669">登录</Button>
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="184,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" PreviewKeyUp="Key_Press"/>
+            <Label x:Name="label" Content="用户名：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="122,254,0,0" RenderTransformOrigin="0.592,6.718"/>
+        </Grid>
+
 
     </Grid>
 </Window>
