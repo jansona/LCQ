@@ -80,7 +80,7 @@ namespace PigeonWindows
                         );
             if (textRange1.Text == "")
                 return;
-            friend.Messages.Text += "我: "+textRange1.Text;
+            friend.Messages.Text += "我: "+textRange1.Text+"\n";
             friend.Export();
             var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
             if (friend.UserName != "多人聊天")
