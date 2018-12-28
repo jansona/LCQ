@@ -109,6 +109,9 @@ namespace PigeonWindows
             SelectItemChangedCommand = new DelegateCommand<object>((p) => {
                 ListView lv = p as ListView;
                 Friend = lv.SelectedItem as User;
+                if (Friend == null) {
+                    return;
+                }
                 Head = Friend.Head;
                 Nickname = Friend.UserName;
                 Friend.Import();

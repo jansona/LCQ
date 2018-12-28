@@ -144,7 +144,9 @@
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                                    Padding="0">
+                                    Padding="0"
+                                    Click="Button_Minimize"
+                                    >
                                 <Viewbox Width="25"
                                          Height="25">
                                     <Canvas Width="24"
