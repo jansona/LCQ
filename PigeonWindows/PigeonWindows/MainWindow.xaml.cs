@@ -50,6 +50,10 @@ namespace PigeonWindows
         {
             DragMove();
         }
+        private void Button_Minimize(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //handler.SendMessage("192.168.99.1", "19966", "test message");
@@ -64,7 +68,6 @@ namespace PigeonWindows
             var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
             handler.SendMessage(friend.UserIp, "9966", data.ToString());
             friend.Messages.Text += textRange1.Text;
-            textRange1.Text = "";
             friend.Export();
             MessageBox.Document.Blocks.Clear();
         }
