@@ -122,8 +122,12 @@ namespace PigeonWindows
             User targetUser = query.First();
             targetUser.Messages.Text += (targetUser.UserName + " : " + message + "\n");
             targetUser.Export();
-            MainWindowViewModel viewModel = DataContext as MainWindowViewModel;
-            viewModel.Message = targetUser.Messages.Text;
+            User currentUser = FriendList.SelectedItem as User;
+            if (currentUser == targetUser)
+            {
+                MainWindowViewModel viewModel = DataContext as MainWindowViewModel;
+                viewModel.Message = targetUser.Messages.Text;
+            }
             //{
             //    MessageBox.BeginChange();
             //    targetUser.Messages.Text += (targetUser.UserName + " : " + message + "\n");
@@ -146,8 +150,12 @@ namespace PigeonWindows
             User remoteUser = query2.First();
             groupChat.Messages.Text += (remoteUser.UserName + " : " + message + "\n");
             groupChat.Export();
-            MainWindowViewModel viewModel = DataContext as MainWindowViewModel;
-            viewModel.Message = groupChat.Messages.Text;
+            User currentUser = FriendList.SelectedItem as User;
+            if (currentUser == groupChat)
+            {
+                MainWindowViewModel viewModel = DataContext as MainWindowViewModel;
+                viewModel.Message = groupChat.Messages.Text;
+            }
         }
         public void InitClientList(List<User> list)
         {
