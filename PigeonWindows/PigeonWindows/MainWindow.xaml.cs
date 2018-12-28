@@ -69,12 +69,13 @@ namespace PigeonWindows
                         );
 
             var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
+            friend.Messages.Text += textRange1.Text;
+            friend.Export();
             if (friend.UserName != "多人聊天")
                 handler.SendMessage(friend.UserIp, "9966", data.ToString());
             else
                 handler.Broadcast(DatagramType.GroupChat, textRange1.Text);
-            friend.Messages.Text += textRange1.Text;
-            friend.Export();
+            
             MessageBox.Document.Blocks.Clear();
         }
         public void UpdateClientList(string remoteIP, string name, string icon, bool isOnline)
@@ -105,14 +106,16 @@ namespace PigeonWindows
                         where user.UserIp == remoteIP
                         select user;
             User targetUser = query.First();
-            Action updateUI = new Action(() =>
-            {
-                MessageBox.BeginChange();
-                targetUser.Messages.Text += (targetUser.UserName + " : " + message + "\n");
-                MessageBox.EndChange();
-                MessageBox.UpdateLayout();
-            });
-            Dispatcher.BeginInvoke(updateUI);
+            targetUser.Messages.Text += (targetUser.UserName + " : " + message + "\n");
+            targetUser.Export();
+            //Action updateUI = new Action(() =>
+            //{
+            //    MessageBox.BeginChange();
+            //    targetUser.Messages.Text += (targetUser.UserName + " : " + message + "\n");
+            //    MessageBox.EndChange();
+            //    MessageBox.UpdateLayout();
+            //});
+            //Dispatcher.BeginInvoke(updateUI);
         }
         public void InitClientList(List<User> list)
         {
