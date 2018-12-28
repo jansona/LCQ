@@ -179,7 +179,7 @@
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Command="{Binding CloseCommand}"
-                                    Padding="0">
+                                    Padding="0" Click="Button_Click_2">
                                 <Viewbox Width="25"
                                          Height="25">
                                     <Canvas Width="24"
@@ -242,14 +242,17 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                
                 <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
                                          PlacementMode="TopAndAlignCentres"
                                          ToolTipService.Placement="Left"
                                          ToolTip="TIM QQ"
                                          HorizontalAlignment="Right"
                                          VerticalAlignment="Bottom"
-                                         Margin="10 20">
+                                         Margin="10 20" Content="群聊">
+                    <Button Click="Button_Click_1" Content="群聊"></Button>
                 </materialDesign:PopupBox>
+                
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

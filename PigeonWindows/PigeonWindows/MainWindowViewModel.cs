@@ -97,7 +97,9 @@ namespace PigeonWindows
             Friends.Add(new User() { UserName = "用于测试的我",
                 UserIp = "192.168.43.131",
                 Messages = new Message("<h1>测试消息</h1>" + '\n'),
-                Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")) });
+                Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")),
+                IconName = "icon6"
+            });
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
                 window.handler.receiveUpdClient.Close();
