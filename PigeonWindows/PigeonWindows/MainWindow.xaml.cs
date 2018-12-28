@@ -133,8 +133,8 @@ namespace PigeonWindows
                 {
                     var query = from user2 in MainWindowViewModel.Friends
                                 where user2.UserIp == user.UserIp
-                                select user;
-                    if(query.Count()==0)
+                                select user2;
+                    if(query.ToList().Count==0)
                         MainWindowViewModel.Friends.Add(user);
                 }
             });

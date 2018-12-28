@@ -110,7 +110,7 @@ namespace PigeonWindows
                 ListView lv = p as ListView;
                 Friend = lv.SelectedItem as User;
                 if (Friend == null) {
-                    return;
+                    Friend = Friends.ToList()[0];
                 }
                 Head = Friend.Head;
                 Nickname = Friend.UserName;
