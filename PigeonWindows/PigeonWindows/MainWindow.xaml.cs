@@ -61,7 +61,7 @@ namespace PigeonWindows
                         MessageBox.Document.ContentStart,
                         MessageBox.Document.ContentEnd
                         );
-            var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
+            var data = new Datagram(DatagramType.Chat.ToString(), "对面:" + textRange1.Text);
             handler.SendMessage(friend.UserIp, "9966", data.ToString());
             friend.Messages.Text += textRange1.Text;
             textRange1.Text = "";
