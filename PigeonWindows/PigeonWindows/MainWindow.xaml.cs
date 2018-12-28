@@ -78,6 +78,8 @@ namespace PigeonWindows
                         MessageBox.Document.ContentStart,
                         MessageBox.Document.ContentEnd
                         );
+            if (textRange1.Text == "")
+                return;
             friend.Messages.Text += "我: "+textRange1.Text;
             friend.Export();
             var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
@@ -136,7 +138,7 @@ namespace PigeonWindows
             var query2 = from user in MainWindowViewModel.Friends
                         where user.UserIp == userip
                          select user;
-            if (query.First() == null)
+            if (query.ToList().Count==0)
                 return;
             User groupChat = query.First();
             User remoteUser = query2.First();
@@ -154,7 +156,7 @@ namespace PigeonWindows
                     var query = from user2 in MainWindowViewModel.Friends
                                 where user2.UserIp == user.UserIp
                                 select user2;
-                    if (query.ToList().Count == 0)
+                    if (query.ToList().Count == 0&&user.UserName!= "多人聊天")
                         MainWindowViewModel.Friends.Add(user);
                 }
             });
