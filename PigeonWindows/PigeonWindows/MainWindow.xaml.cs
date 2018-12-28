@@ -59,19 +59,19 @@ namespace PigeonWindows
             //ShowBox.AppendText(MessageBox.Text + '\n');
             User friend = FriendList.SelectedItem as User;
 
-                TextRange textRange1 = new TextRange(
-                            MessageBox.Document.ContentStart,
-                            MessageBox.Document.ContentEnd
-                            );
-                var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
-                if (friend.UserName != "多人聊天")
-                    handler.SendMessage(friend.UserIp, "9966", data.ToString());
-                else
-                    
-                friend.Messages.Text += textRange1.Text;
-                textRange1.Text = "";
-                friend.Export();
-                MessageBox.Document.Blocks.Clear();
+            TextRange textRange1 = new TextRange(
+                        MessageBox.Document.ContentStart,
+                        MessageBox.Document.ContentEnd
+                        );
+            var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
+            if (friend.UserName != "多人聊天")
+                handler.SendMessage(friend.UserIp, "9966", data.ToString());
+            else
+                handler.Broadcast(DatagramType.GroupChat, textRange1.Text);
+            friend.Messages.Text += textRange1.Text;
+            textRange1.Text = "";
+            friend.Export();
+            MessageBox.Document.Blocks.Clear();
         }
         public void UpdateClientList(string remoteIP, string name, string icon, bool isOnline)
         {
