@@ -23,7 +23,9 @@ namespace PigeonWindows
         {
             InitializeComponent();
         }
+
         public string myname = "";
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             myname = textBox.Text;
@@ -35,6 +37,14 @@ namespace PigeonWindows
             MainWindow mainWindow = new MainWindow(myname);
             mainWindow.Show();
             this.Close();
+        }
+
+        private void Key_Press(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                Button_Click(this, new RoutedEventArgs());
+            }
         }
     }
 }

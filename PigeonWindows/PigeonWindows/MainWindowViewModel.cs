@@ -88,7 +88,9 @@ namespace PigeonWindows
             this.window = window;
 
             Friends = new ObservableCollection<User>();
-            //Friends.Add(new User() { UserName = "用于测试的我",
+            //Friends.Add(new User()
+            //{
+            //    UserName = "用于测试的我",
             //    UserIp = "192.168.43.131",
             //    Messages = new Message("<h1>测试消息</h1>" + '\n'),
             //    Head = new BitmapImage(new Uri("pack://application:,,,/Images/icon6.jpg")),

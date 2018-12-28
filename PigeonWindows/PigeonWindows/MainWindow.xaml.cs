@@ -154,7 +154,7 @@ namespace PigeonWindows
             Dispatcher.BeginInvoke(updateUI);
         }
 
-        private void MessageBox_KeyDown(object sender, KeyEventArgs e)
+        private void MessageBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -190,7 +190,6 @@ namespace PigeonWindows
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-
             handler.Broadcast(DatagramType.DownLine);
             handler.receiveUpdClient.Close();
             handler.sendUdpClient.Close();
