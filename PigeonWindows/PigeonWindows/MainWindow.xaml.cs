@@ -27,6 +27,7 @@ namespace PigeonWindows
 
         public String MyName { set; get; }
         public String MyIcon { get; set; }
+        private bool isInGroupChat = false;
 
         public MainWindow()
         {
@@ -57,24 +58,29 @@ namespace PigeonWindows
             //handler.TestSend();
             //ShowBox.AppendText(MessageBox.Text + '\n');
             User friend = FriendList.SelectedItem as User;
+
             TextRange textRange1 = new TextRange(
                         MessageBox.Document.ContentStart,
                         MessageBox.Document.ContentEnd
                         );
-            var data = new Datagram(DatagramType.Chat.ToString(), "对面:" + textRange1.Text);
-            handler.SendMessage(friend.UserIp, "9966", data.ToString());
+
+            var data = new Datagram(DatagramType.Chat.ToString(), textRange1.Text);
+            if (friend.UserName != "多人聊天")
+                handler.SendMessage(friend.UserIp, "9966", data.ToString());
+            else
+                handler.Broadcast(DatagramType.GroupChat, textRange1.Text);
             friend.Messages.Text += textRange1.Text;
             textRange1.Text = "";
             friend.Export();
             MessageBox.Document.Blocks.Clear();
         }
-        public void UpdateClientList(string remoteIP, string name,string icon, bool isOnline)
+        public void UpdateClientList(string remoteIP, string name, string icon, bool isOnline)
         {
             if (isOnline)
             {
                 //MainWindowViewModel.Friends.Add(new User(remoteIP, name));
 
-                Action updateUI = new Action(() => { MainWindowViewModel.Friends.Add(new User(remoteIP, name,icon)); });
+                Action updateUI = new Action(() => { MainWindowViewModel.Friends.Add(new User(remoteIP, name, icon)); });
                 Dispatcher.BeginInvoke(updateUI);
             }
             else
@@ -111,7 +117,11 @@ namespace PigeonWindows
             {
                 foreach (User user in list)
                 {
-                    MainWindowViewModel.Friends.Add(user);
+                    var query = from user2 in MainWindowViewModel.Friends
+                                where user2.UserIp == user.UserIp
+                                select user;
+                    if(query.Count()==0)
+                        MainWindowViewModel.Friends.Add(user);
                 }
             });
             Dispatcher.BeginInvoke(updateUI);
@@ -119,11 +129,46 @@ namespace PigeonWindows
 
         private void MessageBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 Button_Click(this, new RoutedEventArgs());
                 MessageBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (!isInGroupChat)
+            {
+                Action updateUI = new Action(() =>
+                {
+                    MainWindowViewModel.Friends.Add(new User("0.0.0.0", "多人聊天", "groupchat"));
+                });
+                Dispatcher.BeginInvoke(updateUI);
+                isInGroupChat = true;
+            }
+            else
+            {
+                var query = from user in MainWindowViewModel.Friends
+                            where user.UserName == "多人聊天"
+                            select user;
+                Action updateUI = new Action(() => 
+                {
+                    MainWindowViewModel.Friends.Remove(query.ToList()[0]);
+                });
+                Dispatcher.BeginInvoke(updateUI);
+                isInGroupChat = false;
+            }
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+            handler.Broadcast(DatagramType.DownLine);
+            handler.receiveUpdClient.Close();
+            handler.sendUdpClient.Close();
+            this.Close();
         }
     }
 }
