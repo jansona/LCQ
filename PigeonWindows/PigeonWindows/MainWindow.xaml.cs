@@ -136,6 +136,8 @@ namespace PigeonWindows
             var query2 = from user in MainWindowViewModel.Friends
                         where user.UserIp == userip
                          select user;
+            if (query.First() == null)
+                return;
             User groupChat = query.First();
             User remoteUser = query2.First();
             groupChat.Messages.Text += (remoteUser.UserName + " : " + message + "\n");
