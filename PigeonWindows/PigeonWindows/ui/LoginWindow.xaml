@@ -98,6 +98,5 @@
             <Label x:Name="label" Content="用户名：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="122,254,0,0" RenderTransformOrigin="0.592,6.718"/>
         </Grid>
 
-
     </Grid>
 </Window>
