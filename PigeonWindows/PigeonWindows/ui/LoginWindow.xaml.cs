@@ -60,5 +60,34 @@ namespace PigeonWindows
             this.Close();
         }
 
+        private void Button2_MouseEnter(object sender, MouseEventArgs e)
+        {
+            button2.Height = 18;
+        }
+
+        private void Button2_MouseLeave(object sender, MouseEventArgs e)
+        {
+            button2.Height = 31;
+        }
+
+        private void Button1_MouseEnter(object sender, MouseEventArgs e)
+        {
+            button1.Height = 18;
+        }
+
+        private void Button1_MouseLeave(object sender, MouseEventArgs e)
+        {
+            button1.Height = 31;
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            button.FontSize = button.FontSize + 5;
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            button.FontSize = button.FontSize - 5;
+        }
     }
 }

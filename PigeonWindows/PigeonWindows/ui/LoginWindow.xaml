@@ -37,8 +37,7 @@
                             <Button Height="31"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
-                                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                                    Padding="0">
+                                    Padding="1">
                                 <Viewbox Width="25"
                                          Height="25">
                                     <Canvas Width="24"
@@ -50,12 +49,15 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Column="1">
-                            <Button Height="31"
+                            <Button x:Name="button1"
+                                    Height="31"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Padding="0"
                                     Click="Button_Minimize0"
+                                    MouseEnter="Button1_MouseEnter"
+                                    MouseLeave="Button1_MouseLeave"
                                     >
                                 <Viewbox Width="25"
                                          Height="25">
@@ -68,10 +70,13 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Column="2">
-                            <Button Height="31"
+                            <Button x:Name="button2"
+                                    Height="31"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                    MouseEnter="Button2_MouseEnter"
+                                    MouseLeave="Button2_MouseLeave"
                                     Command="{Binding CloseCommand}"
                                     Padding="0" Click="Close_Button_Click">
                                 <Viewbox Width="25"
@@ -93,7 +98,13 @@
                 <ImageBrush ImageSource="pack://application:,,,/Images/Login.jpg"/>
             </Grid.Background>
             <!-- Login button -->
-            <Button  Click="Button_Click" Margin="159,301,146,31.8" RenderTransformOrigin="0.451,2.669">登录</Button>
+            <Button  x:Name="button"
+                     Click="Button_Click" 
+                     Margin="159,301,146,31.8" 
+                     RenderTransformOrigin="0.451,2.669" 
+                     MouseEnter="Button_MouseEnter"
+                     MouseLeave="Button_MouseLeave">
+                登录</Button>
             <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="184,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" PreviewKeyUp="Key_Press"/>
             <Label x:Name="label" Content="用户名：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="122,254,0,0" RenderTransformOrigin="0.592,6.718"/>
         </Grid>
