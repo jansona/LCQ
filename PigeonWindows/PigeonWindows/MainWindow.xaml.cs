@@ -27,14 +27,7 @@ namespace PigeonWindows
         public String MyIcon { get; set; }
         private bool isInGroupChat = false;
 
-        public MainWindow()
-        {
-            MyName = "ha";
-            MyIcon = "icon1";
-            InitializeComponent();
-            handler = new UdpHandler(this);
-            this.DataContext = new MainWindowViewModel(this);
-        }
+        
         public MainWindow(String myname)
         {
             MyName = myname;

@@ -32,6 +32,7 @@ namespace UDPClient
             IPEndPoint sendEndPoint = new IPEndPoint(localIp, int.Parse(SendPort));
             sendUdpClient = new UdpClient(sendEndPoint);
 
+            //监听线程启动
             ListenPort = "9966";
             IPEndPoint listenEndPoint = new IPEndPoint(localIp, int.Parse(ListenPort));
             receiveUpdClient = new UdpClient(listenEndPoint);
