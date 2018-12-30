@@ -66,11 +66,17 @@ namespace PigeonWindows
                     Directory.CreateDirectory("messages");
                 }
                 Messages.Text = Message.Encrypt(Messages.Text);
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Message));
-            string xmlFileName = "messages/"+UserName + "message" + ".xml";
-            XmlSerialize(xmlSerializer, xmlFileName, Messages);
-            Console.WriteLine("已保存所有数据");
-            Messages.Text = Message.Decrypt(Messages.Text);
+            try
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Message));
+                string xmlFileName = "messages/" + UserName + "message" + ".xml";
+                XmlSerialize(xmlSerializer, xmlFileName, Messages);
+                Console.WriteLine("已保存所有数据");
+                Messages.Text = Message.Decrypt(Messages.Text);
+            }
+            catch(Exception e) {
+                Console.WriteLine(e.Message);
+            }
         }
         public void Import()
         {

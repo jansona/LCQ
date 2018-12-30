@@ -186,7 +186,7 @@ namespace PigeonWindows
             handler.Broadcast(DatagramType.DownLine);
             handler.receiveUpdClient.Close();
             handler.sendUdpClient.Close();
-            this.Close();
+            Close();
         }
 
         private void ShowBox_TextChanged(object sender, TextChangedEventArgs e)
