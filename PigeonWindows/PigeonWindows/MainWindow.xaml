@@ -140,11 +140,14 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Column="1">
-                            <Button Height="60"
+                            <Button x:Name="min_button"
+                                    Height="60"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Padding="0"
+                                    MouseEnter="Min_button_MouseEnter"
+                                    MouseLeave="Min_button_MouseLeave"
                                     Click="Button_Minimize"
                                     >
                                 <Viewbox Width="25"
@@ -174,11 +177,14 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Column="3">
-                            <Button Height="60"
+                            <Button x:Name="close_button"
+                                    Height="60"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Command="{Binding CloseCommand}"
+                                    MouseEnter="Close_button_MouseEnter"
+                                    MouseLeave="Close_button_MouseLeave"
                                     Padding="0" Click="Button_Click_2">
                                 <Viewbox Width="25"
                                          Height="25">

@@ -193,5 +193,26 @@ namespace PigeonWindows
         {
             ShowBox.ScrollToEnd();
         }
+
+        private void Close_button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            close_button.VerticalAlignment = close_button.VerticalAlignment - 1;
+
+        }
+
+        private void Close_button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            close_button.VerticalAlignment = close_button.VerticalAlignment + 1;
+        }
+
+        private void Min_button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            min_button.VerticalAlignment = min_button.VerticalAlignment - 1;
+        }
+
+        private void Min_button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            min_button.VerticalAlignment = min_button.VerticalAlignment + 1;
+        }
     }
 }
